@@ -1,6 +1,4 @@
-[gd_scene load_steps=2 format=2]
-
-[ext_resource path="res://assets/buttons_titlescreen/play_game.png" type="Texture" id=1]
+[gd_scene format=2]
 
 [node name="TextInterface" type="Control"]
 anchor_right = 1.0
@@ -42,61 +40,30 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -200.0
 margin_top = -204.0
-margin_right = 3.0
+margin_right = -2.0
 margin_bottom = 4.0
 alignment = 1
 
 [node name="Btn_Skip" type="Button" parent="ButtonContainer"]
-margin_top = 72.0
-margin_right = 897.0
-margin_bottom = 92.0
+margin_top = 58.0
+margin_right = 198.0
+margin_bottom = 78.0
 text = "Skip"
 
 [node name="Btn_Pause" type="Button" parent="ButtonContainer"]
-margin_top = 96.0
-margin_right = 897.0
-margin_bottom = 116.0
+margin_top = 82.0
+margin_right = 198.0
+margin_bottom = 102.0
 text = "Pause"
 
 [node name="Btn_Options" type="Button" parent="ButtonContainer"]
-margin_top = 120.0
-margin_right = 897.0
-margin_bottom = 140.0
+margin_top = 106.0
+margin_right = 198.0
+margin_bottom = 126.0
 text = "Options"
 
 [node name="Btn_Quit" type="Button" parent="ButtonContainer"]
-margin_top = 144.0
-margin_right = 897.0
-margin_bottom = 164.0
+margin_top = 130.0
+margin_right = 198.0
+margin_bottom = 150.0
 text = "Quit"
-
-[node name="TextureButton" type="TextureButton" parent="ButtonContainer"]
-margin_top = 168.0
-margin_right = 897.0
-margin_bottom = 208.0
-rect_min_size = Vector2( 0, 40 )
-texture_normal = ExtResource( 1 )
-expand = true
-stretch_mode = 4
-
-[node name="TextureButton2" type="TextureButton" parent="ButtonContainer"]
-margin_top = 212.0
-margin_right = 897.0
-margin_bottom = 212.0
-texture_normal = ExtResource( 1 )
-expand = true
-stretch_mode = 4
-
-[node name="TextureButton3" type="TextureButton" parent="ButtonContainer"]
-margin_top = 216.0
-margin_right = 897.0
-margin_bottom = 216.0
-texture_normal = ExtResource( 1 )
-expand = true
-
-[node name="TextureButton4" type="TextureButton" parent="ButtonContainer"]
-margin_top = 220.0
-margin_right = 897.0
-margin_bottom = 220.0
-texture_normal = ExtResource( 1 )
-expand = true
