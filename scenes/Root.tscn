@@ -24,4 +24,3 @@ margin_bottom = 681.622
 visible = false
 
 [node name="BasicLevel" parent="Viewport" instance=ExtResource( 3 )]
-visible = false
