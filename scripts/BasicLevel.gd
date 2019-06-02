@@ -1,6 +1,7 @@
 extends Node2D
 
 func set_background(name):
+	print("Set bg "+name)
 	# Load the image
 	var image = Image.new()
 	image.load("res://assets/backgrounds/"+name)
@@ -20,6 +21,22 @@ func set_background(name):
 		scale = 720.0 / image.get_height()
 	$Background.scale = Vector2(scale,scale)
 
+func enter_character(name):
+	# Load the image
+	var image = Image.new()
+	image.load("res://assets/characters/"+name+"/default.png")
+	
+	# Make image into texture
+	var texture = ImageTexture.new()
+	texture.create_from_image(image)
+	
+	# Create a new sprite with the texture
+	var sprite = Sprite.new()
+	sprite.texture = texture
+	
+	# Add Sprite to the Characters node
+	$Characters.add_child(sprite)
+
 func execute(command):
 	# Split the command into an array
 	command = command.split(" ")
@@ -29,7 +46,7 @@ func execute(command):
 		"set-bg":
 			set_background(command[1])
 		"enter":
-			pass
+			enter_character(command[1])
 
 func load_txt(filename):
 	# Load the file for the level

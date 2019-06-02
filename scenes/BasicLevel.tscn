@@ -8,3 +8,5 @@ script = ExtResource( 1 )
 [node name="Background" type="Sprite" parent="."]
 position = Vector2( 0.541656, -4.68164 )
 offset = Vector2( 425.923, 260.573 )
+
+[node name="Characters" type="Node2D" parent="."]
