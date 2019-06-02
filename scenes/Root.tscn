@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/LevelLoader.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/TextInterface(Rename_Later).tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/BasicLevel.tscn" type="PackedScene" id=3]
+
+[node name="Root" type="Node"]
+
+[node name="UI" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="LevelLoader" parent="UI" instance=ExtResource( 1 )]
+visible = false
+
+[node name="TextInterface" parent="UI" instance=ExtResource( 2 )]
+visible = false
+margin_left = 1401.87
+margin_top = 681.622
+margin_right = 1401.87
+margin_bottom = 681.622
+
+[node name="Viewport" type="Node2D" parent="."]
+visible = false
+
+[node name="BasicLevel" parent="Viewport" instance=ExtResource( 3 )]
+visible = false

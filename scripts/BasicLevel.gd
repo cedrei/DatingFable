@@ -25,8 +25,11 @@ func execute(command):
 	command = command.split(" ")
 	
 	# The first word is the command
-	if (command[0] == "set-bg"):
-		set_background(command[1])
+	match command[0]:
+		"set-bg":
+			set_background(command[1])
+		"enter":
+			pass
 
 func load_txt(filename):
 	# Load the file for the level
