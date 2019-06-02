@@ -1,0 +1,66 @@
+[gd_scene format=2]
+
+[node name="TextInterface" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="TextDisplay" type="PanelContainer" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1253.0
+margin_top = -205.0
+margin_right = -199.0
+margin_bottom = 3.0
+
+[node name="TextEdit" type="TextEdit" parent="TextDisplay"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1047.0
+margin_bottom = 201.0
+text = "Dialogue is written here"
+readonly = true
+wrap_enabled = true
+
+[node name="SpeakerImage" type="PanelContainer" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1441.19
+margin_top = -205.397
+margin_right = -1249.19
+margin_bottom = 2.60278
+
+[node name="ButtonContainer" type="VBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -200.0
+margin_top = -204.0
+margin_bottom = 4.0
+
+[node name="Btn_Skip" type="Button" parent="ButtonContainer"]
+margin_right = 200.0
+margin_bottom = 20.0
+text = "Skip"
+
+[node name="Btn_Pause" type="Button" parent="ButtonContainer"]
+margin_top = 24.0
+margin_right = 200.0
+margin_bottom = 44.0
+text = "Pause"
+
+[node name="Btn_Options" type="Button" parent="ButtonContainer"]
+margin_top = 48.0
+margin_right = 200.0
+margin_bottom = 68.0
+text = "Options"
+
+[node name="Btn_Quit" type="Button" parent="ButtonContainer"]
+margin_top = 72.0
+margin_right = 200.0
+margin_bottom = 92.0
+text = "Quit"
