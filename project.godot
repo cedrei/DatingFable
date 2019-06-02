@@ -17,7 +17,7 @@ _global_script_class_icons={
 
 config/name="DatingFable"
 run/main_scene="res://scenes/Root.tscn"
-config/icon="res://assets/placeholdericon.png"
+config/icon="res://assets/icon.png"
 
 [display]
 
