@@ -100,7 +100,7 @@ func wait(seconds):
 	# Create a timer, set it to the inputted amount of seconds
 	# Then wait for it to continue, and then execute the next command
 	var t = Timer.new()
-	t.set_wait_time(int(seconds))
+	t.set_wait_time(float(seconds))
 	t.set_one_shot(true)
 	self.add_child(t)
 	t.start()
