@@ -34,20 +34,8 @@ func load_speaker_image(name):
 	var texture = ImageTexture.new()
 	texture.create_from_image(image)
 	
-	# Under this is WIP for now
-	var scale = ($SpeakerImage.margin_right - $SpeakerImage.margin_left) / image.get_width()
-	if (($SpeakerImage.margin_bottom - $SpeakerImage.margin_top) / image.get_height() > scale):
-		scale = ($SpeakerImage.margin_bottom - $SpeakerImage.margin_top) / image.get_height() / image.get_height()
-	
+	# Add the texture to the picture
 	$SpeakerImage/Picture.texture = texture
-	
-	var image_center_x = ($SpeakerImage.margin_right + $SpeakerImage.margin_left)/2
-	var image_center_y = ($SpeakerImage.margin_bottom + $SpeakerImage.margin_top)/2
-	
-	$SpeakerImage/Picture.margin_top = image_center_y - scale*image.get_height()/2
-	$SpeakerImage/Picture.margin_bottom = image_center_y + scale*image.get_height()/2
-	$SpeakerImage/Picture.margin_left = image_center_x - scale*image.get_width()/2
-	$SpeakerImage/Picture.margin_right = image_center_x + scale*image.get_width()/2
 
 func dialogue(name, dialogue):
 	# Make some dialogue
@@ -60,6 +48,11 @@ func dialogue(name, dialogue):
 	for word in dialogue:
 		word = replace_variables(word)
 		$TextDisplay/TextEdit.text += word + " "
+
+func clear():
+	# Clear the dialogue window
+	$TextDisplay/TextEdit.text = ""
+	$SpeakerImage/Picture.texture = null
 
 func continue_script():
 	# Player has finished reading, next command!

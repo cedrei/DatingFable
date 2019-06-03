@@ -2,9 +2,5 @@ set-bg Spectrum.png
 enter Mr-Guy
 myVar = 2
 myVar + 1
-Mr-Guy: Hello there! Your number is {myVar}.
-Mr-Guy: I am a bold one.
-set-pose Mr-Guy upside-down
-Mr-Guy: So bold, in fact, that I can stand upside down.
-Mr-Guy: Let me use some teleporting magic to put us in spaaaaace...
-set-bg spacebg.png
+set-pos Mr-Guy 0.3 0.3
+set-scale Mr-Guy 0.5 0.5
