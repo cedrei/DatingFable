@@ -1,6 +1,8 @@
 set-bg Spectrum.png
 enter Mr-Guy
-Mr-Guy: Hello there!
+myVar = 2
+myVar + 1
+Mr-Guy: Hello there! Your number is {myVar}.
 Mr-Guy: I am a bold one.
 set-pose Mr-Guy upside-down
 Mr-Guy: So bold, in fact, that I can stand upside down.
