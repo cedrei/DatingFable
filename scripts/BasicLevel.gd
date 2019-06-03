@@ -2,6 +2,8 @@ extends Node2D
 
 var active_sprites = {}
 
+var commands = []
+
 func set_background(name):
 	print("Set bg "+name)
 	# Load the image
@@ -53,18 +55,26 @@ func change_pose(character, name):
 	
 	active_sprites[character].texture = texture
 
-func execute(command):
+func execute_next_command():
 	# Split the command into an array
-	command = command.split(" ")
+	var command = commands.pop_front().split(" ")
+	
+	if (command[0].substr(command[0].length()-1,1) == ":"):
+		var text_interface = get_tree().get_root().get_node("Root").get_text_interface()
+		text_interface.dialogue(command)
+		return
 	
 	# The first word is the command
 	match command[0]:
 		"set-bg":
 			set_background(command[1])
+			execute_next_command()
 		"enter":
 			enter_character(command[1])
+			execute_next_command()
 		"set-pose":
 			change_pose(command[1], command[2])
+			execute_next_command()
 
 func load_txt(filename):
 	# Load the file for the level
@@ -84,11 +94,11 @@ func load_txt(filename):
 
 func _ready():
 	# Placeholder, will be called from outside this file
+	
 	init("Falconreach")
 
 func init(level_name):
 	# Load a level
-	var commands = load_txt("res://levels/" + level_name + ".txt")
+	commands = load_txt("res://levels/" + level_name + ".txt")
 	# Loop through it's commands
-	for command in commands:
-		execute(command)
+	execute_next_command()
