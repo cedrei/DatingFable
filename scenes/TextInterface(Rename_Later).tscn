@@ -25,7 +25,6 @@ margin_right = 887.0
 margin_bottom = 201.0
 mouse_filter = 2
 mouse_default_cursor_shape = 0
-text = "Dialogue is written here"
 readonly = true
 wrap_enabled = true
 

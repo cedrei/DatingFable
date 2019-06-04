@@ -294,7 +294,8 @@ func load_txt(filename):
 
 func _ready():
 	# Placeholder, will be called from outside this file
-	init("Falconreach")
+	#init("Falconreach")
+	pass
 
 func init(level_name):
 	# Load a level
