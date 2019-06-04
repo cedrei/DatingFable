@@ -14,7 +14,13 @@ var global_vars = {
 	"Masculine": "Feminine",
 	"Muscular": "Womanly",
 	"muscular": "womanly",
-	"playername": "Mr. Guy"
+	"playername": "Mr. Guy",
+	"him": "her",
+	"his": "her",
+	"Him": "Her",
+	"His": "Her",
+	"Himself": "Herself",
+	"himself": "herself"
 }
 
 func hide_menus():
@@ -55,6 +61,7 @@ func continue_script():
 	$Viewport/BasicLevel.execute_next_command()
 
 func play_game():
+	# Start new game from title screen
 	show_interface()
 	$Viewport.visible = true
 	$Viewport/BasicLevel.init("Falconreach")

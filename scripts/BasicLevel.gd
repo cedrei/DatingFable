@@ -139,6 +139,19 @@ func control_flow_if(statement1, operator, statement2):
 	control_flow_mask.push_front(is_true)
 	execute_next_command()
 
+func clean_up_cutscene():
+	# Remove background
+	$Background.texture = null
+	# Remove all characters
+	for child in $Characters.get_children():
+		child.queue_free()
+	# Clear the dialogue window
+	get_root().get_text_interface().dialogue("","")
+	# Remove all character references
+	active_sprites = {}
+	# Clear commands list
+	commands = []
+
 func execute_next_command():
 	# Split the command into an array, word by word
 	if (commands.size() == 0):
@@ -155,6 +168,11 @@ func execute_next_command():
 	
 	# Check the current line's indention level
 	var indention_level = count_indention(command[0])
+	
+	# Check for "shadow indention"
+	if (command[0].length() == indention_level):
+		execute_next_command()
+		return
 	# Remove any tabs in front of the line
 	command[0] = command[0].substr(indention_level, command[0].length()-indention_level)
 	
@@ -274,9 +292,14 @@ func execute_next_command():
 			execute_next_command()
 		"pause":
 			wait(command[1])
+		"load-cutscene":
+			clean_up_cutscene()
+			init(command[1])
 		"if":
 			control_flow_if(command[1], command[2], command[3])
 		_:
+			# If we still haven't figured out what to do with the line
+			# there must be an error in it. Tell that to the writer.
 			get_root().get_text_interface().dialogue("", "There was an error! See this line: "+commandString)
 
 func load_txt(filename):

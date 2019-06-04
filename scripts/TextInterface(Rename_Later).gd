@@ -17,9 +17,11 @@ func replace_variables(word):
 			# End of a variable, add it's value to the final_word
 			is_in_variable = false
 			if (get_tree().get_root().get_node("Root").global_vars.has(variable_name)):
+				# Does the var exist? Add it to the thing then.
 				final_word += str(get_tree().get_root().get_node("Root").global_vars[variable_name])
 			else:
-				final_word += variable_name+"_is_not_found"
+				# Variable doesn't exist. Make a warning.
+				final_word += "WARNING! Variable {"+variable_name+"} is not defined."
 		elif is_in_variable:
 			# We are reading a variable name
 			variable_name += letter
