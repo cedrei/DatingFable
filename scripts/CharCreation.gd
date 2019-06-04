@@ -30,8 +30,8 @@ func _pressed():
 	checkGender()
 	globalVars = getGlobalVars(globalVars)
 	if textBoxesChanged == true:
-		globalVars.Name = $HeroName/HBoxContainer/HeroName.get_selection_text()
-		globalVars.DracoName = $DracoName/HBoxContainer/DracoName.get_selection_text()
+		globalVars["playername"] = $HeroName/HBoxContainer/HeroName.text
+		globalVars["draconame"] = $DracoName/HBoxContainer/DracoName.text
 	if not gender == null:
 		globalVars.Gender = gender
 	#Starts up the game

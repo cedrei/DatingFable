@@ -7,7 +7,7 @@ Hero: If I can just not get stuned, for once, and out damage it, I can beat it.
 Hero: And get a nice new belt.
 Hero: I want that belt.
 
-Time-Hero: Ready for the next challnge, Hero?
+Time-Hero: Ready for the next challenge, {playername}?
 
 Hero: Going to fight the Mega Meowphant. I think I've got the firepower to beat it.
 
