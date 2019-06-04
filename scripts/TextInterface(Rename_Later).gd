@@ -16,7 +16,10 @@ func replace_variables(word):
 		elif letter == "}":
 			# End of a variable, add it's value to the final_word
 			is_in_variable = false
-			final_word += str(get_tree().get_root().get_node("Root").global_vars[variable_name])
+			if (get_tree().get_root().get_node("Root").global_vars.has(variable_name)):
+				final_word += str(get_tree().get_root().get_node("Root").global_vars[variable_name])
+			else:
+				final_word += variable_name+"_is_not_found"
 		elif is_in_variable:
 			# We are reading a variable name
 			variable_name += letter

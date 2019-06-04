@@ -145,7 +145,8 @@ func execute_next_command():
 		# Reached the end of file
 		# Probably should return to some menu here or whatever
 		return
-	var command = commands.pop_front().split(" ")
+	var commandString = commands.pop_front()
+	var command  = commandString.split(" ")
 	
 	if (command.size() == 0 or command[0] == ""):
 		# Empty command, just skip this line
@@ -275,6 +276,8 @@ func execute_next_command():
 			wait(command[1])
 		"if":
 			control_flow_if(command[1], command[2], command[3])
+		_:
+			get_root().get_text_interface().dialogue("", "There was an error! See this line: "+commandString)
 
 func load_txt(filename):
 	# Load the file for the level
