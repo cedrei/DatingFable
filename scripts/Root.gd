@@ -13,7 +13,8 @@ var global_vars = {
 	"masculine": "feminine",
 	"Masculine": "Feminine",
 	"Muscular": "Womanly",
-	"muscular": "womanly"
+	"muscular": "womanly",
+	"playername": "Mr. Guy"
 }
 
 func hide_menus():
