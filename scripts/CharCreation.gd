@@ -6,8 +6,8 @@ var gender = null
 
 #checks if any of the text boxes are left empty
 func checkTextBoxes():
-	if not $HeroName/HBoxContainer/HeroName.text.empty():
-		if not $DracoName/HBoxContainer/DracoName.text.empty():
+	if not $HeroName/HBoxContainer/HeroName.text == null:
+		if not $DracoName/HBoxContainer/DracoName.text == null:
 			textBoxesChanged = true
 
 #checks what gender is selected
@@ -30,8 +30,8 @@ func _pressed():
 	checkGender()
 	globalVars = getGlobalVars(globalVars)
 	if textBoxesChanged == true:
-		globalVars.Name = $HeroName/HBoxContainer/HeroName.text
-		globalVars.DracoName = $DracoName/HBoxContainer/DracoName.text
+		globalVars.Name = $HeroName/HBoxContainer/HeroName.get_selection_text()
+		globalVars.DracoName = $DracoName/HBoxContainer/DracoName.get_selection_text()
 	if not gender == null:
 		globalVars.Gender = gender
 	#Starts up the game
