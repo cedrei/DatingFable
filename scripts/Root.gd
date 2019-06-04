@@ -44,10 +44,16 @@ func get_text_interface():
 	return $UI/TextInterface
 
 func _ready():
+	pass
 	# Start the game in a level, placeholder testing code.
-	show_interface()
-	$Viewport.visible = true
+	#show_interface()
+	#$Viewport.visible = true
 
 func continue_script():
 	# Execute the next command in the cutscene editor
 	$Viewport/BasicLevel.execute_next_command()
+
+func play_game():
+	show_interface()
+	$Viewport.visible = true
+	$Viewport/BasicLevel.init("Falconreach")
