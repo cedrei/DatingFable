@@ -1,4 +1,4 @@
-	set-big placeholder.png
+set-bg placeholder.png
 
 
 Hero: Alright, Ultimate Blinding Light of Destiny? Check. Baltael's Aventail? Check. Slimy necklace? Eww, check.
