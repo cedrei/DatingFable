@@ -39,6 +39,8 @@ func goto_menu(name):
 			$UI.TitleScreen.visible = true
 		"level-loader":
 			$UI.LevelLoader.visible = true
+		"char-creation":
+			$UI/CharCreation.visible = true
 
 func show_interface():
 	# Hide all UI

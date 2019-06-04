@@ -1,5 +1,5 @@
 extends TextureButton
 
 func _pressed():
-	# Start a new game.
-	get_tree().get_root().get_node("Root").play_game()
+	# goto charcreation
+	get_tree().get_root().get_node("Root").goto_menu("char-creation")
