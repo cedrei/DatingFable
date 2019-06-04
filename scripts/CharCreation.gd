@@ -23,9 +23,16 @@ func getGlobalVars(globalVar):
 	globalVar = get_tree().get_root().get_node("Root").global_vars
 	return globalVar
 
+#this function forces only one gender to be selected at any given time.
+func forceSingularGender():
+	if $GenderSelect/VBoxContainer/HBoxContainer/check_Male.checked():
+		$GenderSelect/VBoxContainer/HBoxContainer/check_Male.unchecked()
+	if $GenderSelect/VBoxContainer/HBoxContainer/check_Female.checked():
+		$GenderSelect/VBoxContainer/HBoxContainer/check_Female.unchecked()
+
 
 #stores everything in global vars
-func _pressed():
+func continue_pressed():
 	checkTextBoxes()
 	checkGender()
 	globalVars = getGlobalVars(globalVars)
