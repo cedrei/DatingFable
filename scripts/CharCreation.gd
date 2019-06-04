@@ -33,6 +33,6 @@ func _pressed():
 		globalVars["playername"] = $HeroName/HBoxContainer/HeroName.text
 		globalVars["draconame"] = $DracoName/HBoxContainer/DracoName.text
 	if not gender == null:
-		globalVars.Gender = gender
+		globalVars["gender"] = gender
 	#Starts up the game
 	get_tree().get_root().get_node("Root").play_game()
