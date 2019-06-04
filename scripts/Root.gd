@@ -58,10 +58,11 @@ func _ready():
 
 func continue_script():
 	# Execute the next command in the cutscene editor
+	print($Viewport.get_children()[0].get_children())
 	$Viewport/BasicLevel.execute_next_command()
 
 func play_game():
 	# Start new game from title screen
 	show_interface()
 	$Viewport.visible = true
-	$Viewport/BasicLevel.init("Falconreach")
+	$Viewport/BasicLevel.init("introduction")

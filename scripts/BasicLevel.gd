@@ -8,6 +8,9 @@ var active_sprites = {}
 # writers in .txts
 var commands = []
 
+# The data for the choice buttons
+var buttons = {}
+
 # Keep track of how many nested ifs we are in
 var control_flow_layer = 0
 # Keep track of which of the nester ifsa re true and false
@@ -151,6 +154,52 @@ func clean_up_cutscene():
 	active_sprites = {}
 	# Clear commands list
 	commands = []
+	# Clear button list
+	buttons = {}
+
+func define_button(name):
+	# Make a button start existing, define placeholder values
+	buttons[name] = {
+		"text": "",
+		"var_name": "placeholder",
+		"operator": "=",
+		"value": 0
+	}
+
+func set_button_text(command):
+	# Set the text of a button
+	# First word is just button-text
+	# Convert from PoolStringArray to Array to allow for popping
+	command = Array(command)
+	command.pop_front()
+	# Second word is the name of the button
+	var name = command.pop_front()
+	# Reset the text of the button
+	buttons[name].text = ""
+	# Loop through the rest of the words and add them to the button text
+	for word in command:
+		buttons[name].text += word + " "
+
+func set_button_action(name, variable, operator, value):
+	# Set what is done when button is clicked on 
+	# (Only supporting setting variables, use ifs with the variables after that)
+	buttons[name].var_name = variable
+	buttons[name].operator = operator
+	buttons[name].value = value
+
+func show_choice(command):
+	# First word is just show-choice
+	# Convert from PoolStringArray to Array to allow for popping
+	command = Array(command)
+	command.pop_front()
+	
+	# Put the button data in an array
+	var button_data = []
+	for button_name in command:
+		button_data.push_back(buttons[button_name])
+	
+	# Pass button array on to the interface
+	get_root().get_text_interface().show_choice(button_data)
 
 func execute_next_command():
 	# Split the command into an array, word by word
@@ -297,6 +346,17 @@ func execute_next_command():
 			init(command[1])
 		"if":
 			control_flow_if(command[1], command[2], command[3])
+		"define-button":
+			define_button(command[1])
+			execute_next_command()
+		"button-text":
+			set_button_text(command)
+			execute_next_command()
+		"button-action":
+			set_button_action(command[1], command[2], command[3], command[4])
+			execute_next_command()
+		"show-choice":
+			show_choice(command)
 		_:
 			# If we still haven't figured out what to do with the line
 			# there must be an error in it. Tell that to the writer.

@@ -1,4 +1,4 @@
-	set-big inn.png
+set-bg placeholder.png
 
 
 Hero: Alright, Ultimate Blinding Light of Destiny? Check. Baltael's Aventail? Check. Slimy necklace? Eww, check.
@@ -7,7 +7,7 @@ Hero: If I can just not get stuned, for once, and out damage it, I can beat it.
 Hero: And get a nice new belt.
 Hero: I want that belt.
 
-Time-Hero: Ready for the next challnge, {playername}?
+Time-Hero: Ready for the next challnge, Hero?
 
 Hero: Going to fight the Mega Meowphant. I think I've got the firepower to beat it.
 
@@ -17,29 +17,22 @@ Hero: Wait, what, DIE?!?
 
 Time-Hero: Enjoy!
 
-	set bg black.png
-	pause 1
 
 Narrator: *The Inn fades into the blackness, the walls bluring and becoming part of the infinite abyss. The floor morphed below {his} feet, becoming transparent as the arena took form. From above, the simmulation took shape, the lines of reality flowing and weaving into a comprehensible form. Then, from beyond the darkness, a mighty roar was heard.*
 
-Hero: Here we go, here we go, here we go. Here I am! Okay, shield up, let's
-do this.
+Hero: Here we go, here we go, here we go. Here I am! Okay, shield up, let's do this.
 
-Narrator: *The beast roared as it charged from the shadows. It hurtled, a bullet of sheer mass towards The Hero. Bracing for the impact, the hero stood ready to tank the blow.*
-Narrator:*However, right in the moment before the beast would collide, it slowed, it's movements becoming fractured and laboured. It froze, a hair's breadth from the face of The Hero, close enough to smell the blood in its breath. And to see the immaculate, jeweled pink in the depths of its eyes.*
+Narrator: *The beast roared as it charged from the shadows. It hurtled, a bullet of sheer mass towards The Hero. Bracing for the impact, The Hero stood ready to tank the blow.*
+Narrator: *However, right in the moment before the beast would collide, it slowed, it's movements becoming fractured and laboured. It froze, a hair's breadth from the face of The Hero, close enough to smell the blood in its breath. And to see the immaculate, jeweled pink in the depths of its eyes.*
 
 Hero: What the- What are those?
 
 Narrator: *Then, as if nothing had happened at all, the beast collided with The Hero. Blackness overtook {him} as {his} body was sent hurtling into the abyss.*
 
-	set-bg black.png
-	pause 2
 
- 	---Dove theme plays (for later)
-	pause 3
+Narrator: Hey Dev team, get Dove's theme to play here
 
-Dove: Hey there sunshine
+Dove: Hey there Sunshine
 
-	set-bg dove-intro.png
 
 Narrator: *The Hero awakes to find {himself} sitting on a bar stool, staring into the deep aqua eyes of none other than Dove. But all is not as it seems :lennythink:*
