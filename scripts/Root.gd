@@ -73,6 +73,12 @@ func setup_gender(gender):
 	for i in range(0,gender_pronouns.size()):
 		global_vars[gender_pronouns[i][0]] = gender_pronouns[i][gender_id]
 
+func play_music(name):
+	# Set the stream of the Music node to the inputted music
+	var audiostream = load('res://audio/' + name + '.ogg')
+	$Audio/Music.set_stream(audiostream)
+	$Audio/Music.play()
+
 func continue_script():
 	# Execute the next command in the cutscene editor
 	$Viewport/BasicLevel.execute_next_command()
