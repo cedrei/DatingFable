@@ -23,9 +23,16 @@ func getGlobalVars(globalVar):
 	globalVar = get_tree().get_root().get_node("Root").global_vars
 	return globalVar
 
+#this function forces only one gender to be selected at any given time.
+func forceSingularGender(gender):
+	if gender == "male" and $GenderSelect/VBoxContainer/HBoxContainer/check_Female.pressed:
+		$GenderSelect/VBoxContainer/HBoxContainer/check_Female.pressed = false
+	if gender == "female" and $GenderSelect/VBoxContainer/HBoxContainer/check_Male.pressed:
+		$GenderSelect/VBoxContainer/HBoxContainer/check_Male.pressed = false
+
 
 #stores everything in global vars
-func _pressed():
+func continue_pressed():
 	checkTextBoxes()
 	checkGender()
 	globalVars = getGlobalVars(globalVars)
@@ -33,6 +40,15 @@ func _pressed():
 		globalVars["playername"] = $HeroName/HBoxContainer/HeroName.text
 		globalVars["draconame"] = $DracoName/HBoxContainer/DracoName.text
 	if not gender == null:
-		globalVars["gender"] = gender
+		# Sets up all gender pronoun variables
+		get_tree().get_root().get_node("Root").setup_gender(gender)
 	#Starts up the game
 	get_tree().get_root().get_node("Root").play_game()
+
+func _on_check_Female_toggled(button_pressed):
+	if button_pressed:
+		forceSingularGender("female")
+
+func _on_check_Male_toggled(button_pressed):
+	if button_pressed:
+		forceSingularGender("male")

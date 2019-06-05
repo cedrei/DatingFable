@@ -74,6 +74,7 @@ rect_min_size = Vector2( 330, 93 )
 custom_fonts/font = SubResource( 2 )
 
 [node name="DracoName" type="PanelContainer" parent="."]
+editor/display_folded = true
 margin_left = 294.734
 margin_top = 284.322
 margin_right = 839.734
@@ -143,3 +144,5 @@ margin_bottom = 708.0
 custom_fonts/font = SubResource( 8 )
 text = "Continue"
 script = ExtResource( 4 )
+[connection signal="toggled" from="GenderSelect/VBoxContainer/HBoxContainer/check_Male" to="." method="_on_check_Male_toggled"]
+[connection signal="toggled" from="GenderSelect/VBoxContainer/HBoxContainer/check_Female" to="." method="_on_check_Female_toggled"]

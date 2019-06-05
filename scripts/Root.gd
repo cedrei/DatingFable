@@ -1,27 +1,29 @@
 extends Node
 
+# Values of the gender pronouns automatically loaded into the game at gender pickinh
+var gender_pronouns = [
+	["man", "woman"],
+	["Man", "Woman"],
+	["he", "she"],
+	["He", "She"],
+	["Stud", "Lady"],
+	["stud", "lady"],
+	["handsome", "gorgeous"],
+	["Handsome", "Gorgeous"],
+	["masculine", "feminine"],
+	["Masculine", "Feminine"],
+	["Muscular", "Womanly"],
+	["muscular", "womanly"],
+	["him", "her"],
+	["his", "her"],
+	["Him", "Her"],
+	["His", "Her"],
+	["Himself", "Herself"],
+	["himself", "herself"]
+]
+
 # Vars accessible from the cutscene editor
-var global_vars = {
-	"man": "woman",
-	"Man": "Woman",
-	"he": "she",
-	"He": "She",
-	"Stud": "Lady",
-	"stud": "lady",
-	"handsome": "gorgeous",
-	"Handsome": "Gorgeous",
-	"masculine": "feminine",
-	"Masculine": "Feminine",
-	"Muscular": "Womanly",
-	"muscular": "womanly",
-	"playername": "Mr. Guy",
-	"him": "her",
-	"his": "her",
-	"Him": "Her",
-	"His": "Her",
-	"Himself": "Herself",
-	"himself": "herself"
-}
+var global_vars = {}
 
 func hide_menus():
 	# Hide all UI
@@ -58,9 +60,21 @@ func _ready():
 	#show_interface()
 	#$Viewport.visible = true
 
+func setup_gender(gender):
+	# Set all appropriate gender pronouns
+	var gender_id
+	if gender == "female":
+		gender_id = 1
+	else:
+		gender_id = 0
+	global_vars["gender"] = gender
+	# Loop through the gender_prounouns. Set the masculine form as the key, and then
+	# the appropriate version as the value
+	for i in range(0,gender_pronouns.size()):
+		global_vars[gender_pronouns[i][0]] = gender_pronouns[i][gender_id]
+
 func continue_script():
 	# Execute the next command in the cutscene editor
-	print($Viewport.get_children()[0].get_children())
 	$Viewport/BasicLevel.execute_next_command()
 
 func play_game():

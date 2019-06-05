@@ -18,16 +18,7 @@ func replace_variables(word):
 			is_in_variable = false
 			if (get_tree().get_root().get_node("Root").global_vars.has(variable_name)):
 				# Does the var exist? Add it to the thing then.
-				
-				###Sorry to barge in here unannounced, but I decided to supply a temporay fix onto the problems of the 
-				###gender keys, my patch will query the Gender key/value pair and supply the correct word to be filtered though
-				###I'll explain it in better detail soonish, sorry about that. -Quartz
-				
-
-				if get_tree().get_root().get_node("Root").global_vars["gender"] == "female" or variable_name == "playername" or variable_name == "draconame":
-					final_word += str(get_tree().get_root().get_node("Root").global_vars[variable_name])
-				else:
-					final_word += variable_name
+				final_word += str(get_tree().get_root().get_node("Root").global_vars[variable_name])
 			else:
 				# Variable doesn't exist. Make a warning.
 				final_word += "WARNING! Variable {"+variable_name+"} is not defined."
