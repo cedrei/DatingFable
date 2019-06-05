@@ -1,10 +1,9 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scripts/CharCreation.gd" type="Script" id=1]
 [ext_resource path="res://assets/backgrounds/spacebg.png" type="Texture" id=2]
 [ext_resource path="res://fonts/arialbd.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://scripts/checkGender.gd" type="Script" id=4]
-[ext_resource path="res://scripts/CharCreateContinue.gd" type="Script" id=5]
+[ext_resource path="res://scripts/CharCreateContinue.gd" type="Script" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 19
@@ -49,6 +48,7 @@ margin_bottom = 40.0
 texture = ExtResource( 2 )
 
 [node name="HeroName" type="PanelContainer" parent="."]
+editor/display_folded = true
 margin_left = 283.183
 margin_top = 137.415
 margin_right = 917.183
@@ -75,6 +75,7 @@ rect_min_size = Vector2( 330, 93 )
 custom_fonts/font = SubResource( 2 )
 
 [node name="DracoName" type="PanelContainer" parent="."]
+editor/display_folded = true
 margin_left = 294.734
 margin_top = 284.322
 margin_right = 839.734
@@ -128,7 +129,6 @@ margin_right = 81.0
 margin_bottom = 36.0
 custom_fonts/font = SubResource( 6 )
 text = "Male"
-script = ExtResource( 4 )
 
 [node name="check_Female" type="CheckBox" parent="GenderSelect/VBoxContainer/HBoxContainer"]
 margin_left = 85.0
@@ -136,7 +136,6 @@ margin_right = 195.0
 margin_bottom = 36.0
 custom_fonts/font = SubResource( 7 )
 text = "Female"
-script = ExtResource( 4 )
 
 [node name="btn_continue" type="Button" parent="."]
 margin_left = 452.0
@@ -145,4 +144,6 @@ margin_right = 809.0
 margin_bottom = 708.0
 custom_fonts/font = SubResource( 8 )
 text = "Continue"
-script = ExtResource( 5 )
+script = ExtResource( 4 )
+[connection signal="toggled" from="GenderSelect/VBoxContainer/HBoxContainer/check_Male" to="." method="_on_check_Male_toggled"]
+[connection signal="toggled" from="GenderSelect/VBoxContainer/HBoxContainer/check_Female" to="." method="_on_check_Female_toggled"]
