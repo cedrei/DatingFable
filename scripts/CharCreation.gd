@@ -40,7 +40,8 @@ func continue_pressed():
 		globalVars["playername"] = $HeroName/HBoxContainer/HeroName.text
 		globalVars["draconame"] = $DracoName/HBoxContainer/DracoName.text
 	if not gender == null:
-		globalVars["gender"] = gender
+		# Sets up all gender pronoun variables
+		get_tree().get_root().get_node("Root").setup_gender(gender)
 	#Starts up the game
 	get_tree().get_root().get_node("Root").play_game()
 

@@ -48,7 +48,6 @@ margin_bottom = 40.0
 texture = ExtResource( 2 )
 
 [node name="HeroName" type="PanelContainer" parent="."]
-editor/display_folded = true
 margin_left = 283.183
 margin_top = 137.415
 margin_right = 917.183
