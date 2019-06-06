@@ -51,6 +51,10 @@ func set_background(name):
 		scale = 720.0 / image.get_height()
 	$Background.scale = Vector2(scale,scale)
 
+func play_music(name):
+	# Music is played from root
+	get_root().play_music(name)
+
 func enter_character(name):
 	# Load the image
 	var image = Image.new()
@@ -323,6 +327,9 @@ func execute_next_command():
 	match command[0]:
 		"set-bg":
 			set_background(command[1])
+			execute_next_command()
+		"play-music":
+			play_music(command[1])
 			execute_next_command()
 		"enter":
 			enter_character(command[1])
