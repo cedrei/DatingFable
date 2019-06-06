@@ -75,7 +75,7 @@ func setup_gender(gender):
 
 func play_music(name):
 	# Set the stream of the Music node to the inputted music
-	var audiostream = load('res://audio/' + name + '.ogg')
+	var audiostream = load('res://assets/audio/music/' + name + '.ogg')
 	$Audio/Music.set_stream(audiostream)
 	$Audio/Music.play()
 
@@ -84,7 +84,7 @@ func play_sound(name):
 	var audio_stream_player = AudioStreamPlayer.new()
 	
 	# Load the sound, and set the AudioStreamPlayer to play it
-	var audiostream = load('res://audio/' + name + '.wav')
+	var audiostream = load('res://assets/audio/sounds/' + name + '.wav')
 	audio_stream_player.set_stream(audiostream)
 	audio_stream_player.volume_db = -12.0
 	
