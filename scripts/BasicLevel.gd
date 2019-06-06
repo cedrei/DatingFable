@@ -51,10 +51,6 @@ func set_background(name):
 		scale = 720.0 / image.get_height()
 	$Background.scale = Vector2(scale,scale)
 
-func play_music(name):
-	# Music is played from root
-	get_root().play_music(name)
-
 func enter_character(name):
 	# Load the image
 	var image = Image.new()
@@ -272,6 +268,11 @@ func execute_next_command():
 		# ClickAnywhereToContinue script
 		return
 	
+	if (command.size() == 1):
+		# We don't want to break the following statements by not
+		# not having command[1] being defined
+		command.push_back("")
+	
 	if (command[1] == "="):
 		# Set a custom variable
 		# Check if it is an int
@@ -329,7 +330,13 @@ func execute_next_command():
 			set_background(command[1])
 			execute_next_command()
 		"play-music":
-			play_music(command[1])
+			get_root().play_music(command[1])
+			execute_next_command()
+		"stop-music":
+			get_root().stop_music()
+			execute_next_command()
+		"play-sound":
+			get_root().play_sound(command[1])
 			execute_next_command()
 		"enter":
 			enter_character(command[1])

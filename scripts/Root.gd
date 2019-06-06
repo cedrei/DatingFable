@@ -79,6 +79,29 @@ func play_music(name):
 	$Audio/Music.set_stream(audiostream)
 	$Audio/Music.play()
 
+func play_sound(name):
+	# Create new AudioStreamPlayer
+	var audio_stream_player = AudioStreamPlayer.new()
+	
+	# Load the sound, and set the AudioStreamPlayer to play it
+	var audiostream = load('res://audio/' + name + '.wav')
+	audio_stream_player.set_stream(audiostream)
+	audio_stream_player.volume_db = -12.0
+	
+	# Add the node to the tree
+	$Audio.add_child(audio_stream_player)
+	# Play the sound
+	audio_stream_player.play()
+	# Wait for sound to finish
+	yield(audio_stream_player, "finished")
+	# Clear up the node to prevent memory leak
+	$Audio.remove_child(audio_stream_player)
+	audio_stream_player.queue_free()
+
+func stop_music():
+	# Stop the current music
+	$Audio/Music.stop()
+
 func continue_script():
 	# Execute the next command in the cutscene editor
 	$Viewport/BasicLevel.execute_next_command()
