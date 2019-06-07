@@ -46,16 +46,18 @@ func dialogue(name, dialogue):
 	# Make some dialogue
 	$TextDisplay/TextEdit.text = ""
 	# We are now waiting for the player to click
-	if get_root().skip:
-		wait(0.1)
-	else:
-		$ClickAnywhereToContinue.is_listening = true
 	# Get the speaker's image to the speaker thingy
 	load_speaker_image(name)
 	# Loop through the string and print it to the text box, after replacing the variables in them
 	for word in dialogue:
 		word = replace_variables(word)
 		$TextDisplay/TextEdit.text += word + " "
+	if get_root().skip == 1:
+		wait(0.1)
+	elif get_root().skip == 2:
+		continue_script()
+	else:
+		$ClickAnywhereToContinue.is_listening = true
 
 func show_choice(button_data):
 	# Swap the text display to a button display

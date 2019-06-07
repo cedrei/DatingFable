@@ -24,7 +24,9 @@ var gender_pronouns = [
 
 # Vars accessible from the cutscene editor
 var global_vars = {}
-var skip = false
+
+# Skip has three levels: 0 is normal, 1 is fast forward, 2 is instant skip
+var skip = 0
 
 func hide_menus():
 	# Hide all UI
@@ -101,8 +103,8 @@ func continue_script():
 	# Execute the next command in the cutscene editor
 	$Viewport/BasicLevel.execute_next_command()
 
-func set_skip():
-	skip = true
+func set_skip(level):
+	skip = level
 
 func play_game():
 	# Start new game from title screen

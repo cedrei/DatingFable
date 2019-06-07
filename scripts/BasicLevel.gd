@@ -20,9 +20,6 @@ func get_root():
 	# Get the root object
 	return get_tree().get_root().get_node("Root")
 
-func is_skipping():
-	return get_root().skip
-
 func count_indention(string):
 	# Function to count a line's indentation level
 	# Loop through the string and count the tabs
@@ -117,7 +114,7 @@ func wait(seconds):
 	# waiting (or this function wouldn't have been called at all. Since
 	# the script already continues automatically when clicking the skip button
 	# this shouldn't be called if that is the case.
-	if not get_root().skip:
+	if get_root().skip == 0:
 		execute_next_command()
 
 func control_flow_if(statement1, operator, statement2):
@@ -363,12 +360,14 @@ func execute_next_command():
 			position_character(command[1], command[2], command[3])
 			execute_next_command()
 		"pause":
-			if not is_skipping():
+			if get_root().skip == 0:
 				wait(command[1])
+			elif get_root().skip == 1:
+				wait(0.1)
 			else:
 				execute_next_command()
 		"load-cutscene":
-			get_root().skip = false
+			get_root().skip = 0
 			clean_up_cutscene()
 			init(command[1])
 		"if":
@@ -383,7 +382,7 @@ func execute_next_command():
 			set_button_action(command[1], command[2], command[3], command[4])
 			execute_next_command()
 		"show-choice":
-			get_root().skip = false
+			get_root().skip = 0
 			show_choice(command)
 		_:
 			# If we still haven't figured out what to do with the line
