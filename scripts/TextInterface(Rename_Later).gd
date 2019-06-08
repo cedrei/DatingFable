@@ -46,13 +46,18 @@ func dialogue(name, dialogue):
 	# Make some dialogue
 	$TextDisplay/TextEdit.text = ""
 	# We are now waiting for the player to click
-	$ClickAnywhereToContinue.is_listening = true
 	# Get the speaker's image to the speaker thingy
 	load_speaker_image(name)
 	# Loop through the string and print it to the text box, after replacing the variables in them
 	for word in dialogue:
 		word = replace_variables(word)
 		$TextDisplay/TextEdit.text += word + " "
+	if get_root().skip == 1:
+		wait(0.1)
+	elif get_root().skip == 2:
+		continue_script()
+	else:
+		$ClickAnywhereToContinue.is_listening = true
 
 func show_choice(button_data):
 	# Swap the text display to a button display
@@ -76,6 +81,18 @@ func show_choice(button_data):
 
 func get_root():
 	return get_tree().get_root().get_node("Root")
+
+func wait(seconds):
+	# Create a timer, set it to the inputted amount of seconds
+	# Then wait for it to continue, and then execute the next command
+	var t = Timer.new()
+	t.set_wait_time(float(seconds))
+	t.set_one_shot(true)
+	self.add_child(t)
+	t.start()
+	yield(t, "timeout")
+	t.queue_free()
+	continue_script()
 
 func button_pressed(action):
 	# One of the choice buttons are clicked!
@@ -133,4 +150,4 @@ func clear():
 
 func continue_script():
 	# Player has finished reading, next command!
-	get_tree().get_root().get_node("Root").continue_script()
+	get_root().continue_script()

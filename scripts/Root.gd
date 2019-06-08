@@ -25,6 +25,9 @@ var gender_pronouns = [
 # Vars accessible from the cutscene editor
 var global_vars = {}
 
+# Skip has three levels: 0 is normal, 1 is fast forward, 2 is instant skip
+var skip = 0
+
 func hide_menus():
 	# Hide all UI
 	for node in $UI.get_children():
@@ -53,12 +56,6 @@ func show_interface():
 func get_text_interface():
 	# Get a reference to the in-game interface
 	return $UI/TextInterface
-
-func _ready():
-	pass
-	# Start the game in a level, placeholder testing code.
-	#show_interface()
-	#$Viewport.visible = true
 
 func setup_gender(gender):
 	# Set all appropriate gender pronouns
@@ -105,6 +102,9 @@ func stop_music():
 func continue_script():
 	# Execute the next command in the cutscene editor
 	$Viewport/BasicLevel.execute_next_command()
+
+func set_skip(level):
+	skip = level
 
 func play_game():
 	# Start new game from title screen

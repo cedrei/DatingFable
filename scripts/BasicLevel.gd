@@ -109,7 +109,13 @@ func wait(seconds):
 	t.start()
 	yield(t, "timeout")
 	t.queue_free()
-	execute_next_command()
+	# Continue the script
+	# If skip is active, that can only have happened while this wait() was
+	# waiting (or this function wouldn't have been called at all. Since
+	# the script already continues automatically when clicking the skip button
+	# this shouldn't be called if that is the case.
+	if get_root().skip == 0:
+		execute_next_command()
 
 func control_flow_if(statement1, operator, statement2):
 	var is_true = false
@@ -354,8 +360,14 @@ func execute_next_command():
 			position_character(command[1], command[2], command[3])
 			execute_next_command()
 		"pause":
-			wait(command[1])
+			if get_root().skip == 0:
+				wait(command[1])
+			elif get_root().skip == 1:
+				wait(0.1)
+			else:
+				execute_next_command()
 		"load-cutscene":
+			get_root().skip = 0
 			clean_up_cutscene()
 			init(command[1])
 		"if":
@@ -370,6 +382,7 @@ func execute_next_command():
 			set_button_action(command[1], command[2], command[3], command[4])
 			execute_next_command()
 		"show-choice":
+			get_root().skip = 0
 			show_choice(command)
 		_:
 			# If we still haven't figured out what to do with the line
