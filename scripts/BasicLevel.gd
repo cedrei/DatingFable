@@ -412,6 +412,8 @@ func execute_next_command():
 			if command[3] == "wait":
 				# If wait, don't do the next command until fade is done
 				wait(command[2])
+			else:
+				execute_next_command()
 		_:
 			# If we still haven't figured out what to do with the line
 			# there must be an error in it. Tell that to the writer.
