@@ -51,6 +51,23 @@ func set_background(name):
 		scale = 720.0 / image.get_height()
 	$Background.scale = Vector2(scale,scale)
 
+func fade_background(percent, time):
+	# Starting fade
+	var current_fade = $Background.modulate
+	
+	# Get the animation, clear the old values
+	var animation = $AnimationPlayer.get_animation("Fade Background")
+	for i in range(0,animation.track_get_key_count(0)):
+		animation.track_remove_key(0,i)
+	
+	# Set the new values
+	animation.set_length(time)
+	animation.track_insert_key(0, 0, current_fade)
+	animation.track_insert_key(0,time, Color(percent, percent, percent, 1))
+	
+	# Play the animation
+	$AnimationPlayer.play("Fade Background")
+
 func enter_character(name):
 	# Load the image
 	var image = Image.new()
@@ -384,6 +401,17 @@ func execute_next_command():
 		"show-choice":
 			get_root().skip = 0
 			show_choice(command)
+		"fade-background":
+			if command.size() == 2:
+				# Set default for time
+				command.push_back(0)
+			if command.size() == 3:
+				# Set default for wait
+				command.push_back("no-wait")
+			fade_background(float(command[1]), float(command[2]))
+			if command[3] == "wait":
+				# If wait, don't do the next command until fade is done
+				wait(command[2])
 		_:
 			# If we still haven't figured out what to do with the line
 			# there must be an error in it. Tell that to the writer.
