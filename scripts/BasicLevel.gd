@@ -351,6 +351,8 @@ func execute_next_command():
 	match command[0]:
 		"set-bg":
 			set_background(command[1])
+			# Remove old fades
+			fade_background(1, 0)
 			execute_next_command()
 		"play-music":
 			get_root().play_music(command[1])
