@@ -1,0 +1,15 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+path="res://.import/settings_bitmap.png-2471132758bfeea829db7a5314386358.res"
+
+[deps]
+
+source_file="res://assets/buttons_titlescreen/settings_bitmap.png"
+dest_files=[ "res://.import/settings_bitmap.png-2471132758bfeea829db7a5314386358.res" ]
+
+[params]
+
+create_from=1
+threshold=0.1

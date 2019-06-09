@@ -26,6 +26,17 @@ window/size/height=720
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 
+[global]
+
+import=false
+
+[importer_defaults]
+
+bitmap={
+"create_from": 1,
+"threshold": 0.1
+}
+
 [input]
 
 Skip={

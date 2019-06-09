@@ -32,12 +32,17 @@ func replace_variables(word):
 
 func load_speaker_image(name):
 	# Load the speaker image file
-	var image = Image.new()
-	image.load("res://assets/characters/"+name+"/speaker_image.png")
+#	var image = Image.new()
+#	image.load("res://assets/characters/"+name+"/speaker_image.png")
+	
+	var file_path = "res://assets/characters/"+name+"/speaker_image.png"
+	
+	var directory = Directory.new()
+	if not directory.file_exists(file_path):
+		return
 	
 	# Make image into texture
-	var texture = ImageTexture.new()
-	texture.create_from_image(image)
+	var texture = load(file_path)
 	
 	# Add the texture to the picture
 	$SpeakerImage/Picture.texture = texture

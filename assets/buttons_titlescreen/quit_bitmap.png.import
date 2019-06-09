@@ -1,0 +1,15 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+path="res://.import/quit_bitmap.png-8b00e0c0e8fc167a56c396dfb671efd9.res"
+
+[deps]
+
+source_file="res://assets/buttons_titlescreen/quit_bitmap.png"
+dest_files=[ "res://.import/quit_bitmap.png-8b00e0c0e8fc167a56c396dfb671efd9.res" ]
+
+[params]
+
+create_from=1
+threshold=0.1

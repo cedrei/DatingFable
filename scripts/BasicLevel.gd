@@ -33,12 +33,11 @@ func count_indention(string):
 
 func set_background(name):
 	# Load the image
-	var image = Image.new()
-	image.load("res://assets/backgrounds/"+name)
+#	var image = Image.new()
+#	image.load("res://assets/backgrounds/"+name)
 	
 	# Make image into texture
-	var texture = ImageTexture.new()
-	texture.create_from_image(image)
+	var texture = load("res://assets/backgrounds/"+name)
 	
 	# Set background to texture
 	$Background.texture = texture
@@ -46,9 +45,9 @@ func set_background(name):
 	# Calculate the scale to make the image fit the screen
 	# Use the larger value to make sure that the background
 	# fills the entire screen
-	var scale = 1280.0 / image.get_width()
-	if (720.0 / image.get_height() > scale):
-		scale = 720.0 / image.get_height()
+	var scale = 1280.0 / texture.get_width()
+	if (720.0 / texture.get_height() > scale):
+		scale = 720.0 / texture.get_height()
 	$Background.scale = Vector2(scale,scale)
 
 func fade_background(percent, time):
@@ -70,12 +69,11 @@ func fade_background(percent, time):
 
 func enter_character(name):
 	# Load the image
-	var image = Image.new()
-	image.load("res://assets/characters/"+name+"/default.png")
+#	var image = Image.new()
+#	image.load("res://assets/characters/"+name+"/default.png")
 	
 	# Make image into texture
-	var texture = ImageTexture.new()
-	texture.create_from_image(image)
+	var texture = load("res://assets/characters/"+name+"/default.png")
 	
 	# Create a new sprite with the texture
 	var sprite = Sprite.new()
@@ -93,12 +91,11 @@ func enter_character(name):
 
 func change_pose(character, pose_name):
 	# Load the same character but in a different pose
-	var image = Image.new()
-	image.load("res://assets/characters/"+character+"/" + pose_name + ".png")
+#	var image = Image.new()
+#	image.load("res://assets/characters/"+character+"/" + pose_name + ".png")
 	
 	# Make the image into a texture object
-	var texture = ImageTexture.new()
-	texture.create_from_image(image)
+	var texture = load("res://assets/characters/"+character+"/" + pose_name + ".png")
 	
 	active_sprites[character].texture = texture
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://assets/backgrounds/spacebgred.png" type="Texture" id=1]
 [ext_resource path="res://fonts/arialbd.ttf" type="DynamicFontData" id=2]
@@ -6,19 +6,23 @@
 [ext_resource path="res://assets/buttons_titlescreen/play_game.png" type="Texture" id=4]
 [ext_resource path="res://assets/buttons_titlescreen/play_game_clicked.png" type="Texture" id=5]
 [ext_resource path="res://assets/buttons_titlescreen/play_game_highlight.png" type="Texture" id=6]
-[ext_resource path="res://scripts/btn_Start.gd" type="Script" id=7]
-[ext_resource path="res://assets/buttons_titlescreen/load_game.png" type="Texture" id=8]
-[ext_resource path="res://assets/buttons_titlescreen/load_game_clicked.png" type="Texture" id=9]
-[ext_resource path="res://assets/buttons_titlescreen/load_game_highlight.png" type="Texture" id=10]
-[ext_resource path="res://scenes/btn_Load.gd" type="Script" id=11]
-[ext_resource path="res://assets/buttons_titlescreen/settings.png" type="Texture" id=12]
-[ext_resource path="res://assets/buttons_titlescreen/settings_clicked.png" type="Texture" id=13]
-[ext_resource path="res://assets/buttons_titlescreen/settings_highlight.png" type="Texture" id=14]
-[ext_resource path="res://scenes/btn_Settings.gd" type="Script" id=15]
-[ext_resource path="res://assets/buttons_titlescreen/quit.png" type="Texture" id=16]
-[ext_resource path="res://assets/buttons_titlescreen/quit_clicked.png" type="Texture" id=17]
-[ext_resource path="res://assets/buttons_titlescreen/quit_highlight.png" type="Texture" id=18]
-[ext_resource path="res://scripts/btn_Quit.gd" type="Script" id=19]
+[ext_resource path="res://assets/buttons_titlescreen/load_game_bitmap.png" type="BitMap" id=7]
+[ext_resource path="res://scripts/btn_Start.gd" type="Script" id=8]
+[ext_resource path="res://assets/buttons_titlescreen/load_game.png" type="Texture" id=9]
+[ext_resource path="res://assets/buttons_titlescreen/load_game_clicked.png" type="Texture" id=10]
+[ext_resource path="res://assets/buttons_titlescreen/load_game_highlight.png" type="Texture" id=11]
+[ext_resource path="res://assets/buttons_titlescreen/play_game_bitmap.png" type="BitMap" id=12]
+[ext_resource path="res://scenes/btn_Load.gd" type="Script" id=13]
+[ext_resource path="res://assets/buttons_titlescreen/settings.png" type="Texture" id=14]
+[ext_resource path="res://assets/buttons_titlescreen/settings_clicked.png" type="Texture" id=15]
+[ext_resource path="res://assets/buttons_titlescreen/settings_highlight.png" type="Texture" id=16]
+[ext_resource path="res://assets/buttons_titlescreen/settings_bitmap.png" type="BitMap" id=17]
+[ext_resource path="res://scenes/btn_Settings.gd" type="Script" id=18]
+[ext_resource path="res://assets/buttons_titlescreen/quit.png" type="Texture" id=19]
+[ext_resource path="res://assets/buttons_titlescreen/quit_clicked.png" type="Texture" id=20]
+[ext_resource path="res://assets/buttons_titlescreen/quit_highlight.png" type="Texture" id=21]
+[ext_resource path="res://assets/buttons_titlescreen/quit_bitmap.png" type="BitMap" id=22]
+[ext_resource path="res://scripts/btn_Quit.gd" type="Script" id=23]
 
 [sub_resource type="DynamicFont" id=1]
 size = 27
@@ -78,8 +82,9 @@ mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 4 )
 texture_pressed = ExtResource( 5 )
 texture_hover = ExtResource( 6 )
+texture_click_mask = ExtResource( 7 )
 expand = true
-script = ExtResource( 7 )
+script = ExtResource( 8 )
 
 [node name="btn_Load" type="TextureButton" parent="Menu"]
 margin_top = 84.0
@@ -87,11 +92,12 @@ margin_right = 503.0
 margin_bottom = 164.0
 rect_min_size = Vector2( 30, 80 )
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource( 8 )
-texture_pressed = ExtResource( 9 )
-texture_hover = ExtResource( 10 )
+texture_normal = ExtResource( 9 )
+texture_pressed = ExtResource( 10 )
+texture_hover = ExtResource( 11 )
+texture_click_mask = ExtResource( 12 )
 expand = true
-script = ExtResource( 11 )
+script = ExtResource( 13 )
 
 [node name="btn_Settings" type="TextureButton" parent="Menu"]
 margin_top = 168.0
@@ -99,11 +105,12 @@ margin_right = 503.0
 margin_bottom = 248.0
 rect_min_size = Vector2( 30, 80 )
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource( 12 )
-texture_pressed = ExtResource( 13 )
-texture_hover = ExtResource( 14 )
+texture_normal = ExtResource( 14 )
+texture_pressed = ExtResource( 15 )
+texture_hover = ExtResource( 16 )
+texture_click_mask = ExtResource( 17 )
 expand = true
-script = ExtResource( 15 )
+script = ExtResource( 18 )
 
 [node name="btn_Quit" type="TextureButton" parent="Menu"]
 margin_top = 252.0
@@ -111,8 +118,9 @@ margin_right = 503.0
 margin_bottom = 332.0
 rect_min_size = Vector2( 30, 80 )
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource( 16 )
-texture_pressed = ExtResource( 17 )
-texture_hover = ExtResource( 18 )
+texture_normal = ExtResource( 19 )
+texture_pressed = ExtResource( 20 )
+texture_hover = ExtResource( 21 )
+texture_click_mask = ExtResource( 22 )
 expand = true
-script = ExtResource( 19 )
+script = ExtResource( 23 )
