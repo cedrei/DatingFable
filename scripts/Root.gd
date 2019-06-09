@@ -41,9 +41,9 @@ func goto_menu(name):
 	# Show the right menu
 	match name:
 		"title":
-			$UI.TitleScreen.visible = true
+			$UI/TitleScreen.visible = true
 		"level-loader":
-			$UI.LevelLoader.visible = true
+			$UI/LevelLoader.visible = true
 		"char-creation":
 			$UI/CharCreation.visible = true
 
@@ -106,8 +106,7 @@ func continue_script():
 func set_skip(level):
 	skip = level
 
-func play_game():
-	# Start new game from title screen
+func play_level(level_name):
 	show_interface()
 	$Viewport.visible = true
-	$Viewport/BasicLevel.init("introduction")
+	$Viewport/BasicLevel.init(level_name)

@@ -56,7 +56,7 @@ func continue_pressed():
 		# Sets up all gender pronoun variables
 		get_tree().get_root().get_node("Root").setup_gender(gender)
 	#Starts up the game
-	get_tree().get_root().get_node("Root").play_game()
+	get_tree().get_root().get_node("Root").play_level("introduction")
 
 func _on_check_Female_toggled(button_pressed):
 	if button_pressed:
