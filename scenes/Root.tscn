@@ -16,6 +16,8 @@ visible = false
 
 [node name="BasicLevel" parent="Viewport" instance=ExtResource( 2 )]
 
+[node name="CustomLevel" type="Node2D" parent="Viewport"]
+
 [node name="UI" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0

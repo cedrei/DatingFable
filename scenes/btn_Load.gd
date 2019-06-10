@@ -6,4 +6,4 @@ func _pressed():
 	get_tree().get_root().get_node("Root").global_vars["draconame"] = "Draco"
 	get_tree().get_root().get_node("Root").setup_gender("male")
 	
-	get_tree().get_root().get_node("Root").goto_menu("level-loader")
+	get_tree().get_root().get_node("Root").goto_menu("LevelLoader")

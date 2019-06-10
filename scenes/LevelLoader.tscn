@@ -1,10 +1,16 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scripts/LevelLoader.gd" type="Script" id=1]
+[ext_resource path="res://fonts/arialbd.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 24
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
 
 [node name="LevelLoader" type="Control"]
-margin_right = 1440.0
-margin_bottom = 720.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 script = ExtResource( 1 )
 
 [node name="Background" type="ColorRect" parent="."]
@@ -15,9 +21,49 @@ color = Color( 0.274865, 0.523438, 0.173798, 1 )
 [node name="ScrollContainer" type="ScrollContainer" parent="Background"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 100.0
+margin_left = 98.3298
 margin_top = 100.0
-margin_right = -100.0
+margin_right = -101.67
 margin_bottom = -100.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Background/ScrollContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Background/ScrollContainer"]
+margin_right = 1067.0
+margin_bottom = 28.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/ScrollContainer/HBoxContainer"]
+margin_right = 353.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 353, 0 )
+
+[node name="Label" type="Label" parent="Background/ScrollContainer/HBoxContainer/VBoxContainer"]
+margin_right = 353.0
+margin_bottom = 28.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Cutscenes"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Background/ScrollContainer/HBoxContainer"]
+margin_left = 357.0
+margin_right = 710.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 353, 0 )
+
+[node name="Label" type="Label" parent="Background/ScrollContainer/HBoxContainer/VBoxContainer2"]
+margin_right = 353.0
+margin_bottom = 28.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "UI Screens"
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="Background/ScrollContainer/HBoxContainer"]
+margin_left = 714.0
+margin_right = 1067.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 353, 0 )
+
+[node name="Label" type="Label" parent="Background/ScrollContainer/HBoxContainer/VBoxContainer3"]
+margin_right = 353.0
+margin_bottom = 28.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Scenes (dangerous)"

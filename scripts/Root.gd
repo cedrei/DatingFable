@@ -39,13 +39,7 @@ func goto_menu(name):
 	# Hide the viewport
 	$Viewport.visible = false
 	# Show the right menu
-	match name:
-		"title":
-			$UI/TitleScreen.visible = true
-		"level-loader":
-			$UI/LevelLoader.visible = true
-		"char-creation":
-			$UI/CharCreation.visible = true
+	$UI.get_node(name).visible = true
 
 func show_interface():
 	# Hide all UI
@@ -107,6 +101,23 @@ func set_skip(level):
 	skip = level
 
 func play_level(level_name):
+	# Play a cutscene. Show the cutscene interface, show the relevant stuff, and start the script
 	show_interface()
 	$Viewport.visible = true
+	$Viewport/BasicLevel.visible = true
+	$Viewport/CustomLevel.visible = false
 	$Viewport/BasicLevel.init(level_name)
+
+func play_scene(scene_name):
+	# Open a scene in the custom level node
+	# Set the right visibilities
+	hide_menus()
+	$Viewport.visible = true
+	$Viewport/CustomLevel.visible = true
+	$Viewport/BasicLevel.visible = false
+	# Prevent memory leak
+	for child in $Viewport/CustomLevel.get_children():
+		child.queue_free()
+	# Start up the scene
+	var new_scene = load("res://scenes/"+scene_name+".tscn").instance()
+	$Viewport/CustomLevel.add_child(new_scene)
