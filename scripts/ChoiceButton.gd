@@ -10,4 +10,4 @@ var action = {
 func _pressed():
 	# Tell the TextInterface that a button was clicked
 	# Also, what the data for that button was
-	get_parent().get_parent().get_parent().button_pressed(action)
+	get_parent().get_parent().get_parent().button_pressed(text, action)

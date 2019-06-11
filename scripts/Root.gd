@@ -22,6 +22,8 @@ var gender_pronouns = [
 	["himself", "herself"]
 ]
 
+var dialogue_log = []
+
 # Vars accessible from the cutscene editor
 var global_vars = {}
 
@@ -121,3 +123,8 @@ func play_scene(scene_name):
 	# Start up the scene
 	var new_scene = load("res://scenes/"+scene_name+".tscn").instance()
 	$Viewport/CustomLevel.add_child(new_scene)
+
+func show_log():
+	# For showing the dialogue log
+	$UI/DialogueLog.load_log()
+	goto_menu("DialogueLog")

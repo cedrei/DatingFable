@@ -57,6 +57,10 @@ func dialogue(name, dialogue):
 	for word in dialogue:
 		word = replace_variables(word)
 		$TextDisplay/TextEdit.text += word + " "
+	
+	# Save to the dialogue log
+	get_root().dialogue_log.push_back([name, $TextDisplay/TextEdit.text])
+	
 	if get_root().skip == 1:
 		wait(0.1)
 	elif get_root().skip == 2:
@@ -99,11 +103,14 @@ func wait(seconds):
 	t.queue_free()
 	continue_script()
 
-func button_pressed(action):
+func button_pressed(text, action):
 	# One of the choice buttons are clicked!
 	# Hide buttons, show text display
 	$TextDisplay/TextEdit.visible = true
 	$TextDisplay/ButtonContainer.visible = false
+	
+	# Save to the dialogue log
+	get_root().dialogue_log.push_back(["Picked option", text])
 	# All buttons need to be individually hidden too
 	# Otherwise, if the next button choice has less options than
 	# this one, the remaining buttons would still be there
