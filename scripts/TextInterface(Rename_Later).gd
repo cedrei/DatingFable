@@ -1,5 +1,7 @@
 extends Control
 
+var printing = false
+
 func replace_variables(word):
 	# Replace the variables (inside {}) with their values
 	# The output
@@ -53,13 +55,18 @@ func dialogue(name, dialogue):
 	# We are now waiting for the player to click
 	# Get the speaker's image to the speaker thingy
 	load_speaker_image(name)
+	
+	var string = ""
 	# Loop through the string and print it to the text box, after replacing the variables in them
 	for word in dialogue:
 		word = replace_variables(word)
-		$TextDisplay/TextEdit.text += word + " "
+		string += word + " "
 	
 	# Save to the dialogue log
-	get_root().dialogue_log.push_back([name, $TextDisplay/TextEdit.text])
+	get_root().dialogue_log.push_back([name, string])
+	
+	printing = true
+	$TextDisplay/TextEdit.print_dialogue(string)
 	
 	if get_root().skip == 1:
 		wait(0.1)

@@ -6,5 +6,8 @@ var is_listening = false
 
 func _pressed():
 	if (is_listening):
-		is_listening = false
-		get_parent().continue_script()
+		if get_parent().printing:
+			get_parent().get_node("TextDisplay/TextEdit").write_all()
+		else:
+			is_listening = false
+			get_parent().continue_script()
