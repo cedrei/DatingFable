@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scripts/TextInterface(Rename_Later).gd" type="Script" id=1]
 [ext_resource path="res://scripts/ClickAnywhereToContinue.gd" type="Script" id=2]
@@ -7,7 +7,8 @@
 [ext_resource path="res://scripts/ChoiceButton.gd" type="Script" id=5]
 [ext_resource path="res://scripts/Btn_Skip.gd" type="Script" id=6]
 [ext_resource path="res://scripts/Btn_Log.gd" type="Script" id=7]
-[ext_resource path="res://scenes/Btn_Quit.gd" type="Script" id=8]
+[ext_resource path="res://scripts/Btn_Options.gd" type="Script" id=8]
+[ext_resource path="res://scenes/Btn_Quit.gd" type="Script" id=9]
 
 [sub_resource type="DynamicFont" id=1]
 size = 19
@@ -134,10 +135,11 @@ margin_top = 106.0
 margin_right = 198.0
 margin_bottom = 126.0
 text = "Options"
+script = ExtResource( 8 )
 
 [node name="Btn_Quit" type="Button" parent="ButtonContainer"]
 margin_top = 130.0
 margin_right = 198.0
 margin_bottom = 150.0
 text = "Quit"
-script = ExtResource( 8 )
+script = ExtResource( 9 )

@@ -27,6 +27,12 @@ var dialogue_log = []
 # Vars accessible from the cutscene editor
 var global_vars = {}
 
+var settings = {
+	"text_speed": 50,
+	"sfx_volume": 50,
+	"music_volume": 50
+}
+
 # Skip has three levels: 0 is normal, 1 is fast forward, 2 is instant skip
 var skip = 0
 
@@ -72,6 +78,12 @@ func play_music(name):
 	$Audio/Music.set_stream(audiostream)
 	$Audio/Music.play()
 
+func update_music_volume():
+	if settings.music_volume == 0:
+		$Audio/Music.volume_db = -100
+	else:
+		$Audio/Music.volume_db = settings.music_volume * 0.36 - 24
+
 func play_sound(name):
 	# Create new AudioStreamPlayer
 	var audio_stream_player = AudioStreamPlayer.new()
@@ -79,7 +91,10 @@ func play_sound(name):
 	# Load the sound, and set the AudioStreamPlayer to play it
 	var audiostream = load('res://assets/audio/sounds/' + name + '.wav')
 	audio_stream_player.set_stream(audiostream)
-	audio_stream_player.volume_db = -12.0
+	if settings.sfx_volume == 0:
+		audio_stream_player.volume_db = -100
+	else:
+		audio_stream_player.volume_db = settings.sfx_volume * 0.36 - 24
 	
 	# Add the node to the tree
 	$Audio.add_child(audio_stream_player)
