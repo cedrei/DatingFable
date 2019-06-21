@@ -1,6 +1,7 @@
 extends Control
 
 var printing = false
+var dialogue_parts = []
 
 func replace_variables(word):
 	# Replace the variables (inside {}) with their values
@@ -56,17 +57,26 @@ func dialogue(name, dialogue):
 	# Get the speaker's image to the speaker thingy
 	load_speaker_image(name)
 	
+	
 	var string = ""
 	# Loop through the string and print it to the text box, after replacing the variables in them
 	for word in dialogue:
 		word = replace_variables(word)
 		string += word + " "
 	
+	dialogue_parts = string.split("|")
+	
+	
+	print_line(dialogue_parts[0])
+
+func print_line(dialogue_part):
+	dialogue_parts.remove(0)
+	
 	# Save to the dialogue log
-	get_root().dialogue_log.push_back([name, string])
+	get_root().dialogue_log.push_back([name, dialogue_part])
 	
 	printing = true
-	$TextDisplay/TextEdit.print_dialogue(string)
+	$TextDisplay/TextEdit.print_dialogue(dialogue_part)
 	
 	if get_root().skip == 1:
 		wait(0.1)
@@ -168,5 +178,8 @@ func clear():
 	$SpeakerImage/Picture.texture = null
 
 func continue_script():
-	# Player has finished reading, next command!
-	get_root().continue_script()
+	if dialogue_parts.size() > 0:
+		print_line(dialogue_parts[0])
+	else:
+		# Player has finished reading, next command!
+		get_root().continue_script()
