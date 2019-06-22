@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/Log.gd" type="Script" id=1]
+[ext_resource path="res://fonts/arial.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://scenes/Button.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 20
+font_data = ExtResource( 2 )
 
 [node name="Log" type="Control"]
 anchor_right = 1.0
@@ -28,3 +34,12 @@ margin_right = 1024.0
 margin_bottom = 564.0
 rect_min_size = Vector2( 1024, 564 )
 custom_constants/separation = 16
+
+[node name="Button" type="Button" parent="."]
+margin_left = 805.028
+margin_top = 681.434
+margin_right = 817.028
+margin_bottom = 701.434
+custom_fonts/font = SubResource( 1 )
+text = "Back to title"
+script = ExtResource( 3 )
