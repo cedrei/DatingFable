@@ -1,6 +1,7 @@
 
 play-music placeholder2
 play-sound placeholder2
+set-bg inn.png
 Hero: Alright, Ultimate Blinding Light of Destiny? Check. Baltael's Aventail? Check. Slimy necklace? Eww, check.
 Hero: Today is the day, I will finally beat that stupid giant cat. 'Mega Meowphant.'
 Hero: If I can just not get stuned, for once, and out damage it, I can beat it.
