@@ -119,6 +119,7 @@ func set_skip(level):
 
 func play_level(level_name):
 	# Play a cutscene. Show the cutscene interface, show the relevant stuff, and start the script
+	global_vars["script"] = level_name
 	show_interface()
 	$Viewport.visible = true
 	$Viewport/BasicLevel.visible = true

@@ -1,4 +1,7 @@
 extends Node2D
+#This is used to keep track of how far into a script we are
+#Used primarily by the pause, and save/load systems
+var script_step = null
 
 # A dict keeping track of what characters are on screen
 # We need this to be able to remove them by just using their name
@@ -13,7 +16,9 @@ var buttons = {}
 
 # Keep track of how many nested ifs we are in
 var control_flow_layer = 0
+
 # Keep track of which of the nester ifsa re true and false
+#spelling 100
 var control_flow_mask = [true]
 
 func get_root():
@@ -38,7 +43,7 @@ func set_background(name):
 	
 	# Make image into texture
 	var texture = load("res://assets/backgrounds/"+name)
-	
+	get_root().global_vars["background"] = name
 	# Set background to texture
 	$Background.texture = texture
 	
@@ -88,6 +93,7 @@ func enter_character(name):
 	
 	# Add Sprite to the Characters node
 	$Characters.add_child(sprite)
+	get_root().global_vars["Character" + str(active_sprites)] = name
 
 func change_pose(character, pose_name):
 	# Load the same character but in a different pose
@@ -96,7 +102,7 @@ func change_pose(character, pose_name):
 	
 	# Make the image into a texture object
 	var texture = load("res://assets/characters/"+character+"/" + pose_name + ".png")
-	
+	get_root().global_vars["Character" + str(active_sprites.bsearch(character, false) + "pose")] = pose_name
 	active_sprites[character].texture = texture
 
 func scale_character(character, scaleX, scaleY):
@@ -385,6 +391,7 @@ func execute_next_command():
 		"load-cutscene":
 			get_root().skip = 0
 			clean_up_cutscene()
+			script_step + 1
 			init(command[1])
 		"if":
 			control_flow_if(command[1], command[2], command[3])
@@ -442,5 +449,6 @@ func _ready():
 func init(level_name):
 	# Load a level
 	commands = load_txt("res://levels/" + level_name + ".txt")
+	get_root().global_vars["script"] = name
 	# Loop through it's commands
 	execute_next_command()

@@ -62,7 +62,6 @@ margin_left = 517.752
 margin_top = 222.298
 margin_right = 713.752
 margin_bottom = 238.298
-ticks_on_borders = false
 
 [node name="HSlider3" type="HSlider" parent="."]
 margin_left = 516.524

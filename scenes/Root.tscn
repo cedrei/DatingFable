@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scripts/Root.gd" type="Script" id=1]
 [ext_resource path="res://scenes/BasicLevel.tscn" type="PackedScene" id=2]
@@ -9,7 +9,8 @@
 [ext_resource path="res://scenes/CharCreation.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/Log.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/SaveGame.tscn" type="PackedScene" id=9]
-[ext_resource path="res://assets/audio/music/placeholder.ogg" type="AudioStream" id=10]
+[ext_resource path="res://scenes/LoadGameTrue.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/audio/music/placeholder.ogg" type="AudioStream" id=11]
 
 [node name="Root" type="Node"]
 script = ExtResource( 1 )
@@ -45,8 +46,11 @@ visible = false
 [node name="SaveGame" parent="UI" instance=ExtResource( 9 )]
 visible = false
 
+[node name="LoadGame" parent="UI" instance=ExtResource( 10 )]
+visible = false
+
 [node name="Audio" type="Node" parent="."]
 
 [node name="Music" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource( 10 )
+stream = ExtResource( 11 )
 volume_db = -6.0

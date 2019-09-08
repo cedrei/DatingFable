@@ -1,13 +1,12 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://scripts/SaveGame.gd" type="Script" id=1]
-[ext_resource path="res://assets/backgrounds/spacebg.png" type="Texture" id=2]
+[ext_resource path="res://scripts/LoadGame.gd" type="Script" id=1]
+[ext_resource path="res://assets/backgrounds/spacebgred.png" type="Texture" id=2]
 [ext_resource path="res://fonts/arial.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://scripts/Btn_Quit.gd" type="Script" id=4]
-[ext_resource path="res://scripts/SaveButtonOne.gd" type="Script" id=5]
-[ext_resource path="res://scripts/SaveButtonTwo.gd" type="Script" id=6]
-[ext_resource path="res://scripts/SaveButtonThree.gd" type="Script" id=7]
-[ext_resource path="res://scripts/SaveOverrideConfirmationDialog.gd" type="Script" id=8]
+[ext_resource path="res://scripts/LoadButtonOne.gd" type="Script" id=5]
+[ext_resource path="res://scripts/LoadButtonTwo.gd" type="Script" id=6]
+[ext_resource path="res://scripts/LoadButtonThree.gd" type="Script" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 39
@@ -25,14 +24,14 @@ font_data = ExtResource( 3 )
 size = 30
 font_data = ExtResource( 3 )
 
-[node name="SaveGame" type="Control"]
+[node name="LoadGame" type="Control"]
 margin_right = 1281.0
 margin_bottom = 721.0
 script = ExtResource( 1 )
 
 [node name="TextureRect" type="TextureRect" parent="."]
-margin_right = 2560.0
-margin_bottom = 1440.0
+margin_right = 1293.0
+margin_bottom = 717.0
 texture = ExtResource( 2 )
 
 [node name="CancelButton" type="Button" parent="."]
@@ -50,92 +49,82 @@ margin_top = 43.6267
 margin_right = 1244.85
 margin_bottom = 570.627
 
-[node name="SaveOne" type="VBoxContainer" parent="HBoxContainer"]
+[node name="LoadOne" type="VBoxContainer" parent="HBoxContainer"]
 margin_right = 300.0
 margin_bottom = 527.0
 rect_min_size = Vector2( 300, 527 )
 
-[node name="SOImage" type="TextureRect" parent="HBoxContainer/SaveOne"]
+[node name="LOImage" type="TextureRect" parent="HBoxContainer/LoadOne"]
 margin_right = 300.0
 margin_bottom = 200.0
 rect_min_size = Vector2( 0, 200 )
 
-[node name="SOData" type="TextEdit" parent="HBoxContainer/SaveOne"]
+[node name="LOData" type="TextEdit" parent="HBoxContainer/LoadOne"]
 margin_top = 204.0
 margin_right = 300.0
 margin_bottom = 434.0
 rect_min_size = Vector2( 0, 230 )
 readonly = true
 
-[node name="SOButton" type="Button" parent="HBoxContainer/SaveOne"]
+[node name="LOButton" type="Button" parent="HBoxContainer/LoadOne"]
 margin_top = 438.0
 margin_right = 300.0
 margin_bottom = 508.0
 rect_min_size = Vector2( 0, 70 )
 custom_fonts/font = SubResource( 2 )
-text = "Save"
+text = "Load"
 script = ExtResource( 5 )
 
-[node name="SaveTwo" type="VBoxContainer" parent="HBoxContainer"]
+[node name="LoadTwo" type="VBoxContainer" parent="HBoxContainer"]
 margin_left = 304.0
 margin_right = 604.0
 margin_bottom = 527.0
 rect_min_size = Vector2( 300, 0 )
 
-[node name="STWImage" type="TextureRect" parent="HBoxContainer/SaveTwo"]
+[node name="LTWImage" type="TextureRect" parent="HBoxContainer/LoadTwo"]
 margin_right = 300.0
 margin_bottom = 200.0
 rect_min_size = Vector2( 0, 200 )
 
-[node name="STWData" type="TextEdit" parent="HBoxContainer/SaveTwo"]
+[node name="LTWData" type="TextEdit" parent="HBoxContainer/LoadTwo"]
 margin_top = 204.0
 margin_right = 300.0
 margin_bottom = 434.0
 rect_min_size = Vector2( 0, 230 )
 readonly = true
 
-[node name="STWButton" type="Button" parent="HBoxContainer/SaveTwo"]
+[node name="LTWButton" type="Button" parent="HBoxContainer/LoadTwo"]
 margin_top = 438.0
 margin_right = 300.0
 margin_bottom = 508.0
 rect_min_size = Vector2( 0, 70 )
 custom_fonts/font = SubResource( 3 )
-text = "Save"
+text = "Load"
 script = ExtResource( 6 )
 
-[node name="SaveThree" type="VBoxContainer" parent="HBoxContainer"]
+[node name="LoadThree" type="VBoxContainer" parent="HBoxContainer"]
 margin_left = 608.0
 margin_right = 908.0
 margin_bottom = 527.0
 rect_min_size = Vector2( 300, 0 )
 
-[node name="STHImage" type="TextureRect" parent="HBoxContainer/SaveThree"]
+[node name="LTHImage" type="TextureRect" parent="HBoxContainer/LoadThree"]
 margin_right = 300.0
 margin_bottom = 200.0
 rect_min_size = Vector2( 0, 200 )
 
-[node name="STHData" type="TextEdit" parent="HBoxContainer/SaveThree"]
+[node name="LTHData" type="TextEdit" parent="HBoxContainer/LoadThree"]
 margin_top = 204.0
 margin_right = 300.0
 margin_bottom = 434.0
 rect_min_size = Vector2( 0, 230 )
 readonly = true
 
-[node name="STHButton" type="Button" parent="HBoxContainer/SaveThree"]
+[node name="LTHButton" type="Button" parent="HBoxContainer/LoadThree"]
 margin_top = 438.0
 margin_right = 300.0
 margin_bottom = 508.0
 rect_min_size = Vector2( 0, 70 )
 custom_fonts/font = SubResource( 4 )
-text = "Save"
+text = "Load"
 script = ExtResource( 7 )
-
-[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
-visible = true
-margin_left = 456.0
-margin_top = 300.0
-margin_right = 878.0
-margin_bottom = 404.0
-dialog_text = "Override Current Save?"
-script = ExtResource( 8 )
-[connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_ConfirmationDialog_confirmed" binds= [ false ]]

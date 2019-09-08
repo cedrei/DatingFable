@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scripts/TextInterface(Rename_Later).gd" type="Script" id=1]
 [ext_resource path="res://scripts/ClickAnywhereToContinue.gd" type="Script" id=2]
@@ -7,8 +7,9 @@
 [ext_resource path="res://scripts/ChoiceButton.gd" type="Script" id=5]
 [ext_resource path="res://scripts/Btn_Skip.gd" type="Script" id=6]
 [ext_resource path="res://scripts/Btn_Log.gd" type="Script" id=7]
-[ext_resource path="res://scripts/Btn_Options.gd" type="Script" id=8]
-[ext_resource path="res://scenes/Btn_Quit.gd" type="Script" id=9]
+[ext_resource path="res://scripts/btn_save.gd" type="Script" id=8]
+[ext_resource path="res://scripts/Btn_Options.gd" type="Script" id=9]
+[ext_resource path="res://scripts/Btn_Quit.gd" type="Script" id=10]
 
 [sub_resource type="DynamicFont" id=1]
 size = 19
@@ -117,29 +118,36 @@ margin_bottom = 4.0
 alignment = 1
 
 [node name="Btn_Skip" type="Button" parent="ButtonContainer"]
-margin_top = 58.0
+margin_top = 46.0
 margin_right = 198.0
-margin_bottom = 78.0
+margin_bottom = 66.0
 text = "Skip"
 script = ExtResource( 6 )
 
 [node name="Btn_Log" type="Button" parent="ButtonContainer"]
-margin_top = 82.0
+margin_top = 70.0
 margin_right = 198.0
-margin_bottom = 102.0
+margin_bottom = 90.0
 text = "Log"
 script = ExtResource( 7 )
 
-[node name="Btn_Options" type="Button" parent="ButtonContainer"]
-margin_top = 106.0
+[node name="btn_save" type="Button" parent="ButtonContainer"]
+margin_top = 94.0
 margin_right = 198.0
-margin_bottom = 126.0
-text = "Options"
+margin_bottom = 114.0
+text = "Save"
 script = ExtResource( 8 )
 
-[node name="Btn_Quit" type="Button" parent="ButtonContainer"]
-margin_top = 130.0
+[node name="Btn_Options" type="Button" parent="ButtonContainer"]
+margin_top = 118.0
 margin_right = 198.0
-margin_bottom = 150.0
-text = "Quit"
+margin_bottom = 138.0
+text = "Options"
 script = ExtResource( 9 )
+
+[node name="Btn_Quit" type="Button" parent="ButtonContainer"]
+margin_top = 142.0
+margin_right = 198.0
+margin_bottom = 162.0
+text = "Quit"
+script = ExtResource( 10 )

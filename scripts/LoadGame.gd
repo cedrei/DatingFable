@@ -13,26 +13,25 @@ func check():
 		if(saveFileCheck(i + 1) == false):
 			match i + 1:
 				1: 
-					$HBoxContainer/SaveOne/SOData.text = "No Save Data."
-					#disable button code
-					$HBoxContainer/SaveOne/SOButton.disabled = true
+					$HBoxContainer/LoadOne/LOData.text = "No Save Data."
+					$HBoxContainer/LoadOne/LOButton.disabled = true
 				2: 
-					$HBoxContainer/SaveTwo/TextEdit.text = "No Save Data."
-					$HBoxContainer/SaveTwo/Button.disabled = true
+					$HBoxContainer/LoadTwo/LTWData.text = "No Save Data."
+					$HBoxContainer/LoadTwo/LTWButton.disabled = true
 				3: 
-					$HBoxContainer/SaveThree/TextEdit.text = "No Save Data."
-					$HBoxContainer/SaveThree/Button.disabled = true
+					$HBoxContainer/LoadThree/LTHData.text = "No Save Data."
+					$HBoxContainer/LoadThree/LTHButton.disabled = true
 		else:
 			match i + 1:
 				1: 
-					$HBoxContainer/SaveOne/SOData.text = "Oh hey, some data"
-					$HBoxContainer/SaveOne/SOButton.disabled = true
+					$HBoxContainer/LoadOne/LOData.text = "Oh hey, some data"
+					$HBoxContainer/LoadOne/LOButton.disabled = false
 				2: 
-					$HBoxContainer/SaveTwo/TextEdit.text = "Oh hey, some data"
-					$HBoxContainer/SaveTwo/Button.disabled = true
+					$HBoxContainer/LoadTwo/LTWData.text = "Oh hey, some data"
+					$HBoxContainer/LoadTwo/LTWButton.disabled = false
 				3: 
-					$HBoxContainer/SaveThree/TextEdit.text = "Oh hey, some data"
-					$HBoxContainer/SaveThree/Button.disabled = true
+					$HBoxContainer/LoadThree/LTHData.text = "Oh hey, some data"
+					$HBoxContainer/LoadThree/LTHButton.disabled = false
 
 #general structure of how this all will work:
 #First, game checks if any saves exist, if not display "no save" message and disable that button.
@@ -42,6 +41,26 @@ func check():
 #Saving kinda works the same way, except no buttons are grayed out and saving will also override.
 #how the saving system will work is for another day :>
 #-Quartz563
+
+func loadGame(saveNumber):
+	var file = File.new()
+	if not file.file_exists("res://saves/Save" + str(saveNumber) + ".sav"):
+    print("No file saved!")
+    return
+	# Open existing file
+	if file.open("res://saves/Save" + str(saveNumber) + ".sav", File.READ) != 0:
+    	print("Error opening file")
+    	return
+# Get the data
+	var data = {}
+	data = parse_json(file.get_line())
+	loadGlobalVars(data)
+	get_tree().get_root().get_node("Root/Viewport/BasicLevel").init(get_tree().get_root().get_node("Root").global_vars["script"])
+
+
+func loadGlobalVars(data):
+	get_tree().get_root().get_node("Root").global_vars = data
+
 
 func _ready():
 	check()
