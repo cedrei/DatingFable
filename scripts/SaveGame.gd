@@ -30,18 +30,15 @@ func check():
 				3: 
 					$HBoxContainer/SaveThree/STHData.text = "Oh hey, some data"
 
-#my god I hate this god damn popup system so much.
-#it wont even summon anymore? like w h a t?
-#I'll remove these messages once I get it working, but until then, well we are stuck like this.
 
 func getSave(saveNumber):
 	saveFileNumber = saveNumber
 	if(saveFileCheck(saveNumber) == true):
 		get_node("ConfirmationDialog").summon()
 		if(_on_ConfirmationDialog_confirmed() == true):
-			saveGame(saveNumber)
+			save_game(saveNumber)
 	else:
-		saveGame(saveNumber)
+		save_game(saveNumber)
 
 # warning-ignore:unused_argument
 func getGlobalVars(globalVar):
@@ -49,15 +46,13 @@ func getGlobalVars(globalVar):
 	return globalVar
 
 #hopefully this should save the game 
-func saveGame(saveNumber):
+func save_game(saveNumber):
 	var data = getGlobalVars(globalVars)
-	var file = File.new()
-	if file.open("res://saves/Save" + str(saveNumber) + ".sav", File.WRITE) != 0:
-    	print("Error opening file")
-    	return
-	file.store_line(to_json(data))
-	file.close()
-	check()
+	data["filename"] = "Save" + str(saveNumber)
+	var save_game = File.new()
+	save_game.open("res://saves/Save" + str(saveNumber) + ".sav", File.WRITE)
+	save_game.store_line(to_json(data))
+	save_game.close()
 
 func _ready():
 	check()

@@ -42,25 +42,29 @@ func check():
 #how the saving system will work is for another day :>
 #-Quartz563
 
-func loadGame(saveNumber):
-	var file = File.new()
-	if not file.file_exists("res://saves/Save" + str(saveNumber) + ".sav"):
-    print("No file saved!")
-    return
-	# Open existing file
-	if file.open("res://saves/Save" + str(saveNumber) + ".sav", File.READ) != 0:
-    	print("Error opening file")
-    	return
-# Get the data
-	var data = {}
-	data = parse_json(file.get_line())
-	loadGlobalVars(data)
-	get_tree().get_root().get_node("Root/Viewport/BasicLevel").init(get_tree().get_root().get_node("Root").global_vars["script"])
-
+# Note: This can be called from anywhere inside the tree. This function
+# is path independent.
+func load_game(saveNumber):
+	var new_data = {}
+	var save_game = File.new()
+	if not saveFileCheck(saveNumber):
+		return # Error! We don't have a save to load.
+    # Load the file line by line and process that dictionary to restore
+    # the object it represents.
+	save_game.open("res://saves/Save" + str(saveNumber) + ".sav", File.READ)
+	var current_data = parse_json(save_game.get_as_text())
+	new_data = current_data
+	save_game.close()
+	loadGlobalVars(new_data)
+	getGlobalVars(new_data)
+	get_tree().get_root().get_node("Root").play_level(new_data["Script"])
 
 func loadGlobalVars(data):
 	get_tree().get_root().get_node("Root").global_vars = data
 
+func getGlobalVars(globalVar):
+	globalVar = get_tree().get_root().get_node("Root").global_vars
+	return globalVar
 
 func _ready():
 	check()

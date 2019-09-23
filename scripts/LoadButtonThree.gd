@@ -1,4 +1,4 @@
 extends Button
 
 func _pressed():
-	get_parent().get_parent().get_parent().loadGame(3)
+	get_parent().get_parent().get_parent().load_game(3)
