@@ -57,7 +57,7 @@ func load_game(saveNumber):
 	save_game.close()
 	loadGlobalVars(new_data)
 	getGlobalVars(new_data)
-	get_tree().get_root().get_node("Root").play_level(new_data["Script"])
+	get_tree().get_root().get_node("Root").get_node("Viewport").get_node("BasicLevel").load_file_from_point(new_data["Script"], new_data["Script-Point"])
 
 func loadGlobalVars(data):
 	get_tree().get_root().get_node("Root").global_vars = data

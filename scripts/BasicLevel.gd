@@ -1,8 +1,13 @@
 extends Node2D
 #This is used to keep track of how far into a script we are
 #Used primarily by the pause, and save/load systems
-# warning-ignore:unused_class_variable
 var script_step = null
+var background = null
+var music = null
+
+#While we have active_sprites to be used by the global vars and writers
+#the internal engine requires the list of actual sprites to use for loading purposes
+var internal_active_sprites = {}
 
 # A dict keeping track of what characters are on screen
 # We need this to be able to remove them by just using their name
@@ -38,6 +43,7 @@ func count_indention(string):
 			return indention_level
 
 func set_background(name):
+	background = name
 	# Load the image
 #	var image = Image.new()
 #	image.load("res://assets/backgrounds/"+name)
@@ -90,7 +96,7 @@ func enter_character(name):
 	
 	# Keep track of the character in the active_sprites dict
 	active_sprites[name] = sprite
-	
+	internal_active_sprites[name] = "normal"
 	# Add Sprite to the Characters node
 	$Characters.add_child(sprite)
 
@@ -102,6 +108,7 @@ func change_pose(character, pose_name):
 	# Make the image into a texture object
 	var texture = load("res://assets/characters/"+character+"/" + pose_name + ".png")
 	active_sprites[character].texture = texture
+	internal_active_sprites[name] = pose_name
 
 func scale_character(character, scaleX, scaleY):
 	# Set scale of character, 1 is default size, 1.5 is 50% larger
@@ -112,6 +119,8 @@ func position_character(character, posX, posY):
 	# Position character on screen. 1 is all the way to the right/bottom, 0.5 is in the middle.
 	active_sprites[character].position.x = float(posX) * 1280
 	active_sprites[character].position.y = float(posY) * 720
+	internal_active_sprites[character + "-x"] = posX
+	internal_active_sprites[character + "-y"] = posY
 
 func wait(seconds):
 	# First, clear the dialogue window.
@@ -180,6 +189,7 @@ func clean_up_cutscene():
 	commands = []
 	# Clear button list
 	buttons = {}
+	internal_active_sprites = {}
 
 func define_button(name):
 	# Make a button start existing, define placeholder values
@@ -226,6 +236,7 @@ func show_choice(command):
 	get_root().get_text_interface().show_choice(button_data)
 
 func execute_next_command():
+	script_step = script_step + 1
 	# Split the command into an array, word by word
 	if (commands.size() == 0):
 		# Reached the end of file
@@ -233,6 +244,7 @@ func execute_next_command():
 		return
 	var commandString = commands.pop_front()
 	var command  = commandString.split(" ")
+	
 	
 	if (command.size() == 0 or command[0] == ""):
 		# Empty command, just skip this line
@@ -357,6 +369,7 @@ func execute_next_command():
 			fade_background(1, 0)
 			execute_next_command()
 		"play-music":
+			music = command[1]
 			get_root().play_music(command[1])
 			execute_next_command()
 		"stop-music":
@@ -444,9 +457,73 @@ func _ready():
 	#init("Falconreach")
 	pass
 
+#OK! this is one hell of a function but lets break it all down:
+#First, we take our current script point given from execute_next_command or the save file
+#Next: we take it apart and check to see if it happened to land in a "game breaking command load point"
+#If so, we roll it back until its at a safe location
+#Next: load the characters in specific poses and locations, while also applying the background and music
+#Lastly, we set the brand new commands to be read by execute_next_command
+#Logically speaking, this should be fine. Knowing me however, I messed it up somewhere somehow.
+func begin_script_from_certain_point(script_point, level_name):
+	var script_commands = load_txt("res://levels/" + level_name + ".txt")
+	var commandSet = []
+	var script_point_found = false
+	while (script_point_found != true):
+		for i in range (0, script_commands.size()):
+			if i == script_point:
+				var commandCleaned = script_commands[i]
+				commandSet = commandCleaned.split(" ")
+				if commandSet[1] == "if":
+					script_point = script_point - 1
+					script_point_found = false
+					break
+				elif commandSet[1] == "else":
+					script_point = script_point - 1
+					script_point_found = false
+					break
+				elif commandSet[1] == "define-button":
+					script_point = script_point - 1
+					script_point_found = false
+					break
+				elif commandSet[1] == "button-text":
+					script_point = script_point - 1
+					script_point_found = false
+					break
+				elif commandSet[1] == "button-action":
+					script_point = script_point - 1
+					script_point_found = false
+					break
+	set_background(background)
+	get_root().play_music(music)
+	#right, load sprites
+	for i in internal_active_sprites:
+		if internal_active_sprites[i] == "normal":
+			enter_character(i)
+			if internal_active_sprites[i + "-x"] != null:
+				if internal_active_sprites[i + "-y"] != null:
+					position_character(i, internal_active_sprites[i + "-x"], internal_active_sprites[i + "-y"])
+		elif int(internal_active_sprites[i]) == 0:
+			change_pose(i, internal_active_sprites[i])
+			if internal_active_sprites[i + "-x"] != null:
+				if internal_active_sprites[i + "-y"] != null:
+					position_character(i, internal_active_sprites[i + "-x"], internal_active_sprites[i + "-y"])
+	var counter = 0
+	for i in range(script_point, script_commands):
+		commands[counter] = script_commands[i]
+		counter = counter + 1
+	execute_next_command()
+
+func load_File_from_point(name, point):
+	#todo: set up the following:
+	#music, internal_active_sprites and background
+	#handles loading from script
+	begin_script_from_certain_point(point, name)
+	return
+
 func init(level_name):
 	# Load a level
 	get_root().global_vars["Script"] = level_name
+	script_step = 0
 	commands = load_txt("res://levels/" + level_name + ".txt")
 	# Loop through it's commands
 	execute_next_command()
