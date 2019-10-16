@@ -1,15 +1,20 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scripts/Settings.gd" type="Script" id=1]
 [ext_resource path="res://fonts/arialbd.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://fonts/arial.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://scripts/Button.gd" type="Script" id=4]
+[ext_resource path="res://scripts/load_game_from_point.gd" type="Script" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 20
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=2]
+size = 25
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=3]
 size = 25
 font_data = ExtResource( 3 )
 
@@ -77,6 +82,15 @@ margin_bottom = 441.114
 custom_fonts/font = SubResource( 2 )
 text = "Back to title"
 script = ExtResource( 4 )
+
+[node name="Button2" type="Button" parent="."]
+margin_left = 554.307
+margin_top = 420.587
+margin_right = 768.307
+margin_bottom = 455.587
+custom_fonts/font = SubResource( 3 )
+text = "Back to the Game"
+script = ExtResource( 5 )
 [connection signal="value_changed" from="HSlider" to="." method="_on_HSlider_value_changed"]
 [connection signal="value_changed" from="HSlider2" to="." method="_on_HSlider2_value_changed"]
 [connection signal="value_changed" from="HSlider3" to="." method="_on_HSlider3_value_changed"]

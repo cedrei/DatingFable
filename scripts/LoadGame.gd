@@ -39,25 +39,28 @@ func check():
 #IE: where the player is, what time they saved the game, their name etc
 #the game will also enable enable the button below it too
 #Saving kinda works the same way, except no buttons are grayed out and saving will also override.
-#how the saving system will work is for another day :>
 #-Quartz563
 
-# Note: This can be called from anywhere inside the tree. This function
-# is path independent.
 func load_game(saveNumber):
-	var new_data = {}
+	var global_data = {}
+	var sprite_data = {}
 	var save_game = File.new()
 	if not saveFileCheck(saveNumber):
 		return # Error! We don't have a save to load.
     # Load the file line by line and process that dictionary to restore
     # the object it represents.
 	save_game.open("res://saves/Save" + str(saveNumber) + ".sav", File.READ)
-	var current_data = parse_json(save_game.get_as_text())
-	new_data = current_data
+	var current_data = parse_json(save_game.get_line())
+	global_data = current_data
+	current_data = parse_json(save_game.get_line())
+	sprite_data = current_data
 	save_game.close()
-	loadGlobalVars(new_data)
-	getGlobalVars(new_data)
-	get_tree().get_root().get_node("Root").get_node("Viewport").get_node("BasicLevel").load_file_from_point(new_data["Script"], new_data["Script-Point"])
+	loadGlobalVars(global_data)
+	getGlobalVars(global_data)
+	get_tree().get_root().get_node("Root").get_node("Viewport").get_node("BasicLevel").load_file_from_point(global_data["Script"], global_data["Script-Step"])
+
+func loadInternalSpriteData():
+	 return get_tree().get_root().get_node("Root/Viewport/BasicLevel").internal_active_sprites
 
 func loadGlobalVars(data):
 	get_tree().get_root().get_node("Root").global_vars = data

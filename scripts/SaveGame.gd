@@ -1,6 +1,7 @@
 extends Control
 var globalVars = null
 var saveFileNumber = null
+var internal_sprite_data = null
 
 
 func saveFileCheck(saveNumber):
@@ -45,13 +46,19 @@ func getGlobalVars(globalVar):
 	globalVar = get_tree().get_root().get_node("Root").global_vars
 	return globalVar
 
+func getInternalSprites(internal_sprites):
+	internal_sprites = get_tree().get_root().get_node("Root/Viewport/BasicLevel").internal_active_sprites
+	return internal_sprites
+
 #hopefully this should save the game 
 func save_game(saveNumber):
-	var data = getGlobalVars(globalVars)
-	data["filename"] = "Save" + str(saveNumber)
+	var globalVarData = getGlobalVars(globalVars)
+	var internalSpriteData = getInternalSprites(internal_sprite_data)
+	globalVarData["filename"] = "Save" + str(saveNumber)
 	var save_game = File.new()
 	save_game.open("res://saves/Save" + str(saveNumber) + ".sav", File.WRITE)
-	save_game.store_line(to_json(data))
+	save_game.store_line(to_json(globalVarData))
+	save_game.store_line(to_json(internalSpriteData))
 	save_game.close()
 
 func _ready():

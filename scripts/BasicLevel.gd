@@ -43,7 +43,7 @@ func count_indention(string):
 			return indention_level
 
 func set_background(name):
-	background = name
+	get_root().global_vars["background"] = name
 	# Load the image
 #	var image = Image.new()
 #	image.load("res://assets/backgrounds/"+name)
@@ -369,7 +369,7 @@ func execute_next_command():
 			fade_background(1, 0)
 			execute_next_command()
 		"play-music":
-			music = command[1]
+			get_root().global_vars["music"] = command[1]
 			get_root().play_music(command[1])
 			execute_next_command()
 		"stop-music":
@@ -493,8 +493,8 @@ func begin_script_from_certain_point(script_point, level_name):
 					script_point = script_point - 1
 					script_point_found = false
 					break
-	set_background(background)
-	get_root().play_music(music)
+	set_background(get_root().global_vars["background"])
+	get_root().play_music(get_root().global_vars["music"])
 	#right, load sprites
 	for i in internal_active_sprites:
 		if internal_active_sprites[i] == "normal":
@@ -508,17 +508,19 @@ func begin_script_from_certain_point(script_point, level_name):
 				if internal_active_sprites[i + "-y"] != null:
 					position_character(i, internal_active_sprites[i + "-x"], internal_active_sprites[i + "-y"])
 	var counter = 0
+	script_point = script_point - 1
 	for i in range(script_point, script_commands):
 		commands[counter] = script_commands[i]
 		counter = counter + 1
 	execute_next_command()
 
-func load_File_from_point(name, point):
-	#todo: set up the following:
-	#music, internal_active_sprites and background
-	#handles loading from script
-	begin_script_from_certain_point(point, name)
-	return
+
+func load_file_from_point(name, point):
+	if get_tree().get_root().get_node("Root/UI/LoadGame").loadInternalSpriteData() == null:
+		begin_script_from_certain_point(point, name)
+	else:
+		internal_active_sprites = get_tree().get_root().get_node("Root/UI/LoadGame").loadInternalSpriteData()
+		begin_script_from_certain_point(point, name)
 
 func init(level_name):
 	# Load a level
