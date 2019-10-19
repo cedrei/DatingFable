@@ -58,7 +58,8 @@ func save_game(saveNumber):
 	var save_game = File.new()
 	save_game.open("res://saves/Save" + str(saveNumber) + ".sav", File.WRITE)
 	save_game.store_line(to_json(globalVarData))
-	save_game.store_line(to_json(internalSpriteData))
+	if internalSpriteData != null:
+		save_game.store_line(to_json(internalSpriteData))
 	save_game.close()
 
 func _ready():

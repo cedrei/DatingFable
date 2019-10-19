@@ -236,7 +236,6 @@ func show_choice(command):
 	get_root().get_text_interface().show_choice(button_data)
 
 func execute_next_command():
-	script_step = script_step + 1
 	# Split the command into an array, word by word
 	if (commands.size() == 0):
 		# Reached the end of file
@@ -289,6 +288,7 @@ func execute_next_command():
 	# Does the first word end with a ":"?
 	# If so, it is a speak command
 	if (command[0].substr(command[0].length()-1,1) == ":"):
+		script_step = script_step + 1
 		# Load a reference to the interface
 		var text_interface = get_root().get_text_interface()
 		
@@ -311,6 +311,7 @@ func execute_next_command():
 		command.push_back("")
 	
 	if (command[1] == "="):
+		script_step = script_step + 1
 		# Set a custom variable
 		# Check if it is an int
 		if str(int(command[2])) == command[2]:
@@ -323,6 +324,7 @@ func execute_next_command():
 		return
 	
 	if (command[1] == "+"):
+		script_step = script_step + 1
 		# Add to a custom variable
 		if str(int(command[2])) == command[2]:
 			# Is it an int? Just add normally. Add from 0 if the var doesn't exist
@@ -338,6 +340,7 @@ func execute_next_command():
 		return
 	
 	if (command[1] == "-"):
+		script_step = script_step + 1
 		# Subtract from a custom variable
 		if not get_root().global_vars.has(command[0]):
 			get_root().global_vars[command[0]] = 0
@@ -346,6 +349,7 @@ func execute_next_command():
 		return
 	
 	if (command[1] == "*"):
+		script_step = script_step + 1
 		# Multiply a custom variable
 		if not get_root().global_vars.has(command[0]):
 			get_root().global_vars[command[0]] = 0
@@ -354,6 +358,7 @@ func execute_next_command():
 		return
 	
 	if (command[1] == "/"):
+		script_step = script_step + 1
 		# Divide a custom variable
 		if not get_root().global_vars.has(command[0]):
 			get_root().global_vars[command[0]] = 0
@@ -364,36 +369,50 @@ func execute_next_command():
 	# The first word is the command
 	match command[0]:
 		"set-bg":
+			script_step = script_step + 1
+			background = command[1]
+			get_root().global_vars["background"] = command[1]
 			set_background(command[1])
 			# Remove old fades
 			fade_background(1, 0)
 			execute_next_command()
 		"play-music":
+			script_step = script_step + 1
+			music = command[1]
 			get_root().global_vars["music"] = command[1]
 			get_root().play_music(command[1])
 			execute_next_command()
 		"stop-music":
+			script_step = script_step + 1
+			get_root().global_vars["music"] = null
 			get_root().stop_music()
 			execute_next_command()
 		"play-sound":
+			script_step = script_step + 1
 			get_root().play_sound(command[1])
 			execute_next_command()
 		"enter":
+			script_step = script_step + 1
 			enter_character(command[1])
 			execute_next_command()
 		"exit":
+			script_step = script_step + 1
 			active_sprites[command[1]].queue_free()
 			execute_next_command()
 		"set-pose":
+			script_step = script_step + 1
 			change_pose(command[1], command[2])
 			execute_next_command()
 		"set-scale":
+			script_step = script_step + 1
 			scale_character(command[1], command[2], command[3])
 			execute_next_command()
 		"set-pos":
+			script_step = script_step + 1
 			position_character(command[1], command[2], command[3])
 			execute_next_command()
 		"pause":
+			script_step = script_step + 1
 			if get_root().skip == 0:
 				wait(command[1])
 			elif get_root().skip == 1:
@@ -401,24 +420,31 @@ func execute_next_command():
 			else:
 				execute_next_command()
 		"load-cutscene":
+			script_step = script_step + 1
 			get_root().skip = 0
 			clean_up_cutscene()
 			init(command[1])
 		"if":
+			script_step = script_step + 1
 			control_flow_if(command[1], command[2], command[3])
 		"define-button":
+			script_step = script_step + 1
 			define_button(command[1])
 			execute_next_command()
 		"button-text":
+			script_step = script_step + 1
 			set_button_text(command)
 			execute_next_command()
 		"button-action":
+			script_step = script_step + 1
 			set_button_action(command[1], command[2], command[3], command[4])
 			execute_next_command()
 		"show-choice":
+			script_step = script_step + 1
 			get_root().skip = 0
 			show_choice(command)
 		"fade-background":
+			script_step = script_step + 1
 			if command.size() == 2:
 				# Set default for time
 				command.push_back(0)
@@ -466,52 +492,82 @@ func _ready():
 #Logically speaking, this should be fine. Knowing me however, I messed it up somewhere somehow.
 func begin_script_from_certain_point(script_point, level_name):
 	var script_commands = load_txt("res://levels/" + level_name + ".txt")
-	var commandSet = []
 	var script_point_found = false
 	while (script_point_found != true):
 		for i in range (0, script_commands.size()):
 			if i == script_point:
 				var commandCleaned = script_commands[i]
-				commandSet = commandCleaned.split(" ")
-				if commandSet[1] == "if":
-					script_point = script_point - 1
-					script_point_found = false
-					break
-				elif commandSet[1] == "else":
-					script_point = script_point - 1
-					script_point_found = false
-					break
-				elif commandSet[1] == "define-button":
-					script_point = script_point - 1
-					script_point_found = false
-					break
-				elif commandSet[1] == "button-text":
-					script_point = script_point - 1
-					script_point_found = false
-					break
-				elif commandSet[1] == "button-action":
-					script_point = script_point - 1
-					script_point_found = false
-					break
-	set_background(get_root().global_vars["background"])
-	get_root().play_music(get_root().global_vars["music"])
+				var commandString = script_commands.pop_front()
+				var commandSet  = commandString.split(" ")
+				match commandSet[0]:
+					"set-bg":
+						script_point = script_point - 1
+					"play-music":
+						script_point = script_point - 1
+					"stop-music":
+						script_point = script_point - 1
+					"play-sound":
+						script_point = script_point - 1
+					"enter":
+						script_point = script_point - 1
+					"exit":
+						script_point = script_point - 1
+					"set-pose":
+						script_point = script_point - 1
+					"set-scale":
+						script_point = script_point - 1
+					"set-pos":
+						script_point = script_point - 1
+					"pause":
+						script_point = script_point - 1
+					"load-cutscene":
+						script_point = script_point - 1
+					"if":
+						script_point = script_point - 1
+					"define-button":
+						script_point = script_point - 1
+					"button-text":
+						script_point = script_point - 1
+					"button-action":
+						script_point = script_point - 1
+					"show-choice":
+						script_point = script_point - 1
+					"fade-background":
+						script_point = script_point - 1
+					_:
+						script_point_found = true
+	if background == null:
+		set_background(get_root().global_vars["background"])
+	else:
+		set_background(background)
+	if music == null:
+		get_root().play_music(get_root().global_vars["music"])
+	else:
+		get_root().play_music(music)
 	#right, load sprites
-	for i in internal_active_sprites:
-		if internal_active_sprites[i] == "normal":
-			enter_character(i)
-			if internal_active_sprites[i + "-x"] != null:
-				if internal_active_sprites[i + "-y"] != null:
-					position_character(i, internal_active_sprites[i + "-x"], internal_active_sprites[i + "-y"])
-		elif int(internal_active_sprites[i]) == 0:
-			change_pose(i, internal_active_sprites[i])
-			if internal_active_sprites[i + "-x"] != null:
-				if internal_active_sprites[i + "-y"] != null:
-					position_character(i, internal_active_sprites[i + "-x"], internal_active_sprites[i + "-y"])
-	var counter = 0
-	script_point = script_point - 1
-	for i in range(script_point, script_commands):
-		commands[counter] = script_commands[i]
-		counter = counter + 1
+	if internal_active_sprites.empty() != true:
+		for i in internal_active_sprites:
+			if internal_active_sprites[i] == "normal":
+				enter_character(i)
+				if internal_active_sprites[i + "-x"] != null:
+					if internal_active_sprites[i + "-y"] != null:
+						position_character(i, internal_active_sprites[i + "-x"], internal_active_sprites[i + "-y"])
+			elif int(internal_active_sprites[i]) == 0:
+				change_pose(i, internal_active_sprites[i])
+				if internal_active_sprites[i + "-x"] != null:
+					if internal_active_sprites[i + "-y"] != null:
+						position_character(i, internal_active_sprites[i + "-x"], internal_active_sprites[i + "-y"])
+		var counter = 0
+		for i in range(script_point, script_commands.size()):
+			commands[counter] = script_commands[i]
+			counter = counter + 1
+	else:
+	#now its time to put the cleaned commands into the actual command array
+	#and execute them!
+		var counter = 0
+		for i in range(script_point, script_commands.size()):
+			commands[counter] = script_commands[i]
+			counter = counter + 1
 	execute_next_command()
 
 

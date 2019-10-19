@@ -1,4 +1,3 @@
-
 play-music placeholder2
 play-sound placeholder2
 set-bg inn.png
