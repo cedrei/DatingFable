@@ -1,7 +1,7 @@
 extends Node2D
 #This is used to keep track of how far into a script we are
 #Used primarily by the pause, and save/load systems
-var script_step = null
+var script_step = 0
 var background = null
 var music = null
 
@@ -371,7 +371,6 @@ func execute_next_command():
 		"set-bg":
 			script_step = script_step + 1
 			background = command[1]
-			get_root().global_vars["background"] = command[1]
 			set_background(command[1])
 			# Remove old fades
 			fade_background(1, 0)
@@ -536,6 +535,9 @@ func begin_script_from_certain_point(script_point, level_name):
 						script_point = script_point - 1
 					_:
 						script_point_found = true
+	#reason why this specific bit is in it, is because it actually restarts on the next line, rather than the same
+	#line you left off on, this should hopefully stop that
+	script_point = script_point - 1
 	if background == null:
 		set_background(get_root().global_vars["background"])
 	else:
@@ -558,6 +560,7 @@ func begin_script_from_certain_point(script_point, level_name):
 					if internal_active_sprites[i + "-y"] != null:
 						position_character(i, internal_active_sprites[i + "-x"], internal_active_sprites[i + "-y"])
 		var counter = 0
+		commands.resize(script_commands.size())
 		for i in range(script_point, script_commands.size()):
 			commands[counter] = script_commands[i]
 			counter = counter + 1
@@ -565,14 +568,17 @@ func begin_script_from_certain_point(script_point, level_name):
 	#now its time to put the cleaned commands into the actual command array
 	#and execute them!
 		var counter = 0
+		#just makes sure that the array can handle the new command set
+		commands.resize(script_commands.size())
 		for i in range(script_point, script_commands.size()):
 			commands[counter] = script_commands[i]
 			counter = counter + 1
+	get_root().setup_text_interface_from_pause()
 	execute_next_command()
 
 
 func load_file_from_point(name, point):
-	if get_tree().get_root().get_node("Root/UI/LoadGame").loadInternalSpriteData() == null:
+	if get_tree().get_root().get_node("Root/UI/LoadGame").loadInternalSpriteData().empty() == true:
 		begin_script_from_certain_point(point, name)
 	else:
 		internal_active_sprites = get_tree().get_root().get_node("Root/UI/LoadGame").loadInternalSpriteData()
